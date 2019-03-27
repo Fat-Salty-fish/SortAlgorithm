@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 public class MainFunction {
     public static void main(String[] args) {
-        int[] array = {5,1,0,8,4,2,6,7,1,2,0,1,4,7,8,10,55};
+        int[] array = {5,1,8,4,2,6,7,1,2,1,4,7,8,10,55};
         System.out.println(Arrays.toString(array));
 //        BubbleSort.sort(array);
 //        QuickSort.sort(array,0,array.length-1);
@@ -17,7 +17,8 @@ public class MainFunction {
 //        InsertSort.sort(array);
 //        ShellSort.sort(array);
 //        SelectSort.sort(array);
-        MyMergeSort.sort(array);
+//        MyMergeSort.sort(array);
+        RadixSort.sort(array);
         Arrays.stream(array).forEach(i->System.out.print(i+" "));
     }
 }
