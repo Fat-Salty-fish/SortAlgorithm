@@ -9,7 +9,7 @@ package sortFunctions;
 public class MergeSort {
     //进行排序 传入要排序的数组
     public static void sort(int[] array) {
-        int[] temp = new int[array.length]; //在排序开始的时候先准备一个数组 避免排序过程中的平凡开辟地址
+        int[] temp = new int[array.length]; //在排序开始的时候先准备一个数组 避免排序过程中的频繁开辟地址
         sort(array, 0, array.length - 1, temp);
     }
 

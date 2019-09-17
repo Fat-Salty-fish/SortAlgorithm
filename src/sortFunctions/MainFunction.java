@@ -18,7 +18,8 @@ public class MainFunction {
 //        ShellSort.sort(array);
 //        SelectSort.sort(array);
 //        MyMergeSort.sort(array);
-        RadixSort.sort(array);
+//        RadixSort.sort(array);
+        HeapSort.sort(array);
         Arrays.stream(array).forEach(i->System.out.print(i+" "));
     }
 }
