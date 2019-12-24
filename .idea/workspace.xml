@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="833d6ed8-985d-4573-945d-cabfb8c98de6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/leetCode/LeetCode19删除链表的第N个节点.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/leetCode/LeetCode24两两交换链表中的节点.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/leetCode/LeetCode144.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetCode/LeetCode144.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/leetCode/LeetCode690.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetCode/LeetCode690.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/leetCode/first.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/leetCode/second.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/新东方/test.java" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -222,7 +216,8 @@
       <workItem from="1567448195869" duration="33493000" />
       <workItem from="1567608309697" duration="647000" />
       <workItem from="1567609186915" duration="8332000" />
-      <workItem from="1577089078639" duration="1120000" />
+      <workItem from="1577089078639" duration="1700000" />
+      <workItem from="1577169584143" duration="608000" />
     </task>
     <servers />
   </component>
@@ -234,7 +229,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
