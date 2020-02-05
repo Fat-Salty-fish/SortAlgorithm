@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="833d6ed8-985d-4573-945d-cabfb8c98de6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/leetCode/LeetCode24两两交换链表中的节点.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/leetCode/LeetCode24两两交换链表中的节点.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetCode/LeetCode24两两交换链表中的节点.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,12 +43,23 @@
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568300368836" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -68,21 +78,9 @@
       <recent name="F:\JavaProjects\test\src" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Application.LeetCode19删除链表的第N个节点">
-    <configuration name="LeetCode1019" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="leetCode.LeetCode1019" />
+  <component name="RunManager" selected="Application.LeetCode24两两交换链表中的节点">
+    <configuration name="LeetCode19删除链表的第N个节点" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="leetCode.LeetCode19删除链表的第N个节点" />
       <module name="test" />
       <extension name="coverage">
         <pattern>
@@ -94,8 +92,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LeetCode19删除链表的第N个节点" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="leetCode.LeetCode19删除链表的第N个节点" />
+    <configuration name="LeetCode24两两交换链表中的节点" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="leetCode.LeetCode24两两交换链表中的节点" />
       <module name="test" />
       <extension name="coverage">
         <pattern>
@@ -148,13 +146,25 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.LeetCode24两两交换链表中的节点" />
         <item itemvalue="Application.LeetCode19删除链表的第N个节点" />
         <item itemvalue="Application.LeetCode496下一个更大元素1" />
         <item itemvalue="Application.LeetCode503下一个更大元素2" />
         <item itemvalue="Application.LeetCode962最大宽度坡" />
-        <item itemvalue="Application.LeetCode1019" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -218,6 +228,7 @@
       <workItem from="1567609186915" duration="8332000" />
       <workItem from="1577089078639" duration="1700000" />
       <workItem from="1577169584143" duration="608000" />
+      <workItem from="1580917545524" duration="810000" />
     </task>
     <servers />
   </component>
@@ -236,6 +247,44 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="460" y="158" key="#com.intellij.ide.util.MemberChooser" timestamp="1580918438949">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="460" y="158" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1580918438949" />
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1580918547454">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1580918547454" />
+    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1580918547452">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1580918547452" />
+    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1580918547451">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1580918547451" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1580918547453">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1580918547453" />
+    <state width="1398" height="303" key="GridCell.Tab.1.bottom" timestamp="1580918380888">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="303" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1580918380888" />
+    <state width="1398" height="303" key="GridCell.Tab.1.center" timestamp="1580918380887">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="303" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1580918380887" />
+    <state width="1398" height="303" key="GridCell.Tab.1.left" timestamp="1580918380886">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="303" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1580918380886" />
+    <state width="1398" height="303" key="GridCell.Tab.1.right" timestamp="1580918380887">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="303" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1580918380887" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -484,6 +533,11 @@
           <url>file://$PROJECT_DIR$/src/leetCode/LeetCode503下一个更大元素2.java</url>
           <line>15</line>
           <option name="timeStamp" value="108" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/leetCode/LeetCode24两两交换链表中的节点.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="109" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
