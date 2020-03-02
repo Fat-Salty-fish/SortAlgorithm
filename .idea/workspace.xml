@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="833d6ed8-985d-4573-945d-cabfb8c98de6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/leetCode/LeetCode24两两交换链表中的节点.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetCode/LeetCode24两两交换链表中的节点.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/leetCode/LeetCode206.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/leetCode/LeetCode206反转链表.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,9 +78,22 @@
       <recent name="F:\JavaProjects\test\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.LeetCode24两两交换链表中的节点">
+  <component name="RunManager" selected="Application.LeetCode206反转链表">
     <configuration name="LeetCode19删除链表的第N个节点" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="leetCode.LeetCode19删除链表的第N个节点" />
+      <module name="test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="leetCode.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LeetCode206反转链表" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="leetCode.LeetCode206反转链表" />
       <module name="test" />
       <extension name="coverage">
         <pattern>
@@ -131,26 +144,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LeetCode962最大宽度坡" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="leetCode.LeetCode962最大宽度坡" />
-      <module name="test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="leetCode.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.LeetCode206反转链表" />
         <item itemvalue="Application.LeetCode24两两交换链表中的节点" />
         <item itemvalue="Application.LeetCode19删除链表的第N个节点" />
         <item itemvalue="Application.LeetCode496下一个更大元素1" />
         <item itemvalue="Application.LeetCode503下一个更大元素2" />
-        <item itemvalue="Application.LeetCode962最大宽度坡" />
       </list>
     </recent_temporary>
   </component>
@@ -228,7 +228,8 @@
       <workItem from="1567609186915" duration="8332000" />
       <workItem from="1577089078639" duration="1700000" />
       <workItem from="1577169584143" duration="608000" />
-      <workItem from="1580917545524" duration="810000" />
+      <workItem from="1580917545524" duration="1632000" />
+      <workItem from="1583086715371" duration="2083000" />
     </task>
     <servers />
   </component>
@@ -253,38 +254,38 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="460" y="158" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1580918438949" />
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1580918547454">
+    <state width="1398" height="303" key="GridCell.Tab.0.bottom" timestamp="1583089352187">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1580918547454" />
-    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1580918547452">
+    <state width="1398" height="303" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1583089352187" />
+    <state width="1398" height="303" key="GridCell.Tab.0.center" timestamp="1583089352184">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1580918547452" />
-    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1580918547451">
+    <state width="1398" height="303" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1583089352184" />
+    <state width="1398" height="303" key="GridCell.Tab.0.left" timestamp="1583089352183">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1580918547451" />
-    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1580918547453">
+    <state width="1398" height="303" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1583089352183" />
+    <state width="1398" height="303" key="GridCell.Tab.0.right" timestamp="1583089352186">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1580918547453" />
-    <state width="1398" height="303" key="GridCell.Tab.1.bottom" timestamp="1580918380888">
+    <state width="1398" height="303" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1583089352186" />
+    <state width="1398" height="303" key="GridCell.Tab.1.bottom" timestamp="1583089352189">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="303" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1580918380888" />
-    <state width="1398" height="303" key="GridCell.Tab.1.center" timestamp="1580918380887">
+    <state width="1398" height="303" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1583089352189" />
+    <state width="1398" height="303" key="GridCell.Tab.1.center" timestamp="1583089352188">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="303" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1580918380887" />
-    <state width="1398" height="303" key="GridCell.Tab.1.left" timestamp="1580918380886">
+    <state width="1398" height="303" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1583089352188" />
+    <state width="1398" height="303" key="GridCell.Tab.1.left" timestamp="1583089352187">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="303" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1580918380886" />
-    <state width="1398" height="303" key="GridCell.Tab.1.right" timestamp="1580918380887">
+    <state width="1398" height="303" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1583089352187" />
+    <state width="1398" height="303" key="GridCell.Tab.1.right" timestamp="1583089352189">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="303" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1580918380887" />
+    <state width="1398" height="303" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1583089352189" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -535,8 +536,8 @@
           <option name="timeStamp" value="108" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/leetCode/LeetCode24两两交换链表中的节点.java</url>
-          <line>51</line>
+          <url>file://$PROJECT_DIR$/src/leetCode/LeetCode206反转链表.java</url>
+          <line>46</line>
           <option name="timeStamp" value="109" />
         </line-breakpoint>
       </breakpoints>
