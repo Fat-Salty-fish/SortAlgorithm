@@ -33,8 +33,9 @@ public class LeetCode206反转链表 {
 
     //递归方法实现
     public ListNode reverseList(ListNode head) {
-        if (head == null || head.next == null)
+        if (head == null || head.next == null) {
             return head;
+        }
         ListNode p = reverseList(head.next);
         head.next.next = head;
         head.next = null;
@@ -55,7 +56,6 @@ public class LeetCode206反转链表 {
     }
 
     public static void main(String[] args) {
-
         ListNode node1 = new ListNode(1);
         ListNode node2 = new ListNode(2);
         ListNode node3 = new ListNode(3);
@@ -65,6 +65,7 @@ public class LeetCode206反转链表 {
         node2.next = node3;
         node3.next = node4;
         node4.next = node5;
-        System.out.println(new LeetCode206反转链表().reverseList2(node1));
+        ListNode result = new LeetCode206反转链表().reverseList2(node1);
+        System.out.println(result.val);
     }
 }
