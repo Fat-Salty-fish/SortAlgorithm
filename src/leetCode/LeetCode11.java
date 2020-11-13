@@ -19,18 +19,18 @@ public class LeetCode11 {
 //    应该与动态规划类似
 
     public int maxArea(int[] height) {
-        if(height == null || height.length<=0){
+        if (height == null || height.length <= 0) {
             return 0;
         }
         int left = 0;
-        int right = height.length-1;
+        int right = height.length - 1;
         int max = 0;
-        while (left < right){
+        while (left < right) {
 //            int area = (right - left) * (height[left]<height[right]?left:right);
 //            if(max < area){
 //                max = area;
 //            }
-            max = Math.max(max,Math.min(height[left],height[right])*(right-left));
+            max = Math.max(max, Math.min(height[left], height[right]) * (right - left));
             if (height[left] < height[right]) {
                 left++;
             } else {
@@ -39,6 +39,31 @@ public class LeetCode11 {
         }
         return max;
     }
+
+    /**
+     * 重做11
+     * @param height
+     * @return
+     */
+    public int maxArea2(int[] height) {
+        int res = 0;
+        int i = 0;
+        int j = height.length - 1;
+        while (j - i > 0) {
+            int width = j - i;
+            int currentHeight = Math.min(height[i], height[j]);
+            int currentRes = width * currentHeight;
+            res = Math.max(currentRes, res);
+            // 思路:尽量寻找更高的墙 因为是从外向内寻找 所以宽度会越来越短 只能寻求更高的墙壁 只能在两个墙壁间保留更高的那个墙壁 才能有可能存水更多
+            if (height[i] < height[j]) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+        return res;
+    }
+
 
     public static void main(String[] args) {
         LeetCode11 leetCode11 = new LeetCode11();

@@ -9,7 +9,7 @@ package leetCode;
 /**
  * 删除链表中的某个节点 给定一个链表以及
  */
-public class LeetCode237 {
+public class LeetCode237删除链表中的节点 {
 
     class ListNode {
         int val;

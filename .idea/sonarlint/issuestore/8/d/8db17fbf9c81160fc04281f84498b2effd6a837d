@@ -1,0 +1,23 @@
+
+F
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ
+F
+java:S1128	"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ
+h
+java:S1128"MRemove this unused import 'sun.plugin.liveconnect.OriginNotAllowedException'.(æÿ…şÿÿÿÿ
+?
+java:S14813")Remove this unused "over" local variable.(´ÓèŞ
+i
+java:S1128"NRemove this unused import 'com.sun.org.apache.xpath.internal.operations.Bool'.(™¦èûÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¢ğ¼Øùÿÿÿÿ
+P
+java:S1191"5Use classes from the Java API instead of Sun classes.(™¦èûÿÿÿÿ
+N
+java:S18543"8Remove this useless assignment to local variable "over".(´ÓèŞ
+k
+java:S1149"PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(û›şöıÿÿÿÿ
+a	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ÂÕÁu
+N
+java:S1128"3Remove this unused import 'sortFunctions.HeapSort'.(¡”“Àşÿÿÿÿ
+h
+java:S37761"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(Í­Æ

@@ -55,6 +55,18 @@ public class LeetCode206反转链表 {
         return dummyNode.next;
     }
 
+    public ListNode reverseList3(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        // 将此节点之后的链表反转
+        ListNode reverseNext = reverseList3(head.next);
+        // 处理当前节点
+        head.next.next = head;
+        head.next = null;
+        return reverseNext;
+    }
+
     public static void main(String[] args) {
         ListNode node1 = new ListNode(1);
         ListNode node2 = new ListNode(2);
