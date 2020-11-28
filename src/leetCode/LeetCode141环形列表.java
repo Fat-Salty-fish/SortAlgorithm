@@ -29,11 +29,33 @@ public class LeetCode141环形列表 {
         ListNode slowNode = head;
         ListNode fastNode = head.next;
         while (fastNode != null && fastNode.next != null) {
-            if (fastNode == slowNode){
+            if (fastNode == slowNode) {
                 return true;
             }
             slowNode = slowNode.next;
             fastNode = fastNode.next.next;
+        }
+        return false;
+    }
+
+    /**
+     * 链表中是否有环 用快慢节点来判断 如果有环 则快节点一定回追上慢节点
+     *
+     * @param head
+     * @return
+     */
+    public boolean hasCycle3(ListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+        ListNode firstNode = head.next;
+        ListNode secondNode = head;
+        while (firstNode != null && firstNode.next != null) {
+            if (firstNode == secondNode) {
+                return true;
+            }
+            firstNode = firstNode.next.next;
+            secondNode = secondNode.next;
         }
         return false;
     }
