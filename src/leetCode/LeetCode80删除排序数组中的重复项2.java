@@ -56,8 +56,10 @@ public class LeetCode80删除排序数组中的重复项2 {
     }
 
     public static void main(String[] args) {
-        int[] nums = new int[]{0, 0, 1, 1, 1, 1, 2, 3, 3};
-        new LeetCode80删除排序数组中的重复项2().removeDuplicates(nums);
-        System.out.println(nums);
+//        int[] nums = new int[]{1, 1, 2, 3, 4, 5, 6, 6, 6};
+//        new LeetCode80删除排序数组中的重复项2().removeDuplicatesForMyOwn(nums);
+//        System.out.println(nums);
+        int result = (int)11.8/2;
+        System.out.println(result);
     }
 }
