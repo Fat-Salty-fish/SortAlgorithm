@@ -8,20 +8,7 @@ import java.util.List;
  * @author acer
  * @Date 2019/7/25 0:04
  */
-public class LeetCode15 {
-    //给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。
-    //
-    //注意：答案中不可以包含重复的三元组。
-    //
-    //例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]，
-    //
-    //满足要求的三元组集合为：
-    //[
-    //  [-1, 0, 1],
-    //  [-1, -1, 2]
-    //]
-    //
-    //先对数组进行排序 排序之后通过三个指针来完成 确定一个指针对应的数字 移动另外两个指针 相加来判断是否有结果
+public class LeetCode15三数之和 {
 
     public List<List<Integer>> threeSum(int[] nums) {
 
@@ -53,4 +40,10 @@ public class LeetCode15 {
         }
         return ans;
     }
+
+    // 二刷三数之和 总体思路：双指针
+    // 其实和923题类似 只不过是目标和为0 相当于target为0
+//    public List<List<Integer>> threeSum2(int nums[]){
+//
+//    }
 }

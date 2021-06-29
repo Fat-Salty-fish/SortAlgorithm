@@ -1,7 +1,5 @@
 package leetCode;
 
-import java.util.Stack;
-
 /**
  * @author lizhongjie
  * @desc
@@ -71,6 +69,49 @@ public class LeetCode92反转链表2 {
         ListNode nextHead = reverseFromHead(head.next, m - 1);
         head.next.next = head;
         head.next = finallyNode;
+        return nextHead;
+    }
+
+
+    /**
+     * 头条面试 三刷反转链表
+     * 思路 先找到左边界 再反转到N
+     * @param head
+     * @param m
+     * @param n
+     * @return
+     */
+    public ListNode reverseBetween3(ListNode head, int m, int n) {
+        // m == 1时 就是直接从头反转到n即可
+        if (m == 1) {
+            return reverseToN(head, n);
+        }
+        // 因为要返回头节点 此时头节点应该是head 只是head.next需要更新
+        head.next = reverseBetween3(head.next, m - 1, n - 1);
+        return head;
+    }
+
+    /**
+     * 用于记录右边界之后剩余链表的头节点
+     */
+    private ListNode headLeftNode;
+
+    /**
+     * 从头开始反转 反转到第n个 返回头节点
+     * @param head
+     * @param n
+     * @return
+     */
+    public ListNode reverseToN(ListNode head,int n){
+        if (n == 1){
+            headLeftNode = head.next;
+            return head;
+        }
+        ListNode nextHead = reverseToN(head.next,n-1);
+        // 这个是反转链表的精髓 当前节点的next的节点的next指针 要指向当前节点 实现了反转 其实只需要反转当前节点即可
+        head.next.next = head;
+        // 当前节点会作为反转链表之后的最后一个节点 next节点直接指向剩余链表的头节点
+        head.next = headLeftNode;
         return nextHead;
     }
 

@@ -46,13 +46,4 @@ public class LeetCode78子集 {
         return res;
     }
 
-    /**
-     * 三刷子集
-     * 回溯算法
-     * @param nums
-     * @return
-     */
-    public List<List<Integer>> subsets3(int[] nums){
-
-    }
 }
