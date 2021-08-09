@@ -1,10 +1,0 @@
-
-b
-java:S1128"GRemove this unused import 'javax.xml.stream.FactoryConfigurationError'.(”¿Ñíúÿÿÿÿ
-S	java:S106F"9Replace this use of System.out or System.err by a logger.(Ä»õÒýÿÿÿÿ
-V	java:S125"<This block of commented-out lines of code should be removed.(óý±°ûÿÿÿÿ
-t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¢ð¼Øùÿÿÿÿ
-J
-java:S1128"4Remove this unused import 'sun.awt.HeadlessToolkit'.(°’Ññ
-K
-java:S1191"5Use classes from the Java API instead of Sun classes.(°’Ññ

@@ -1,7 +1,0 @@
-
-6
-java:S2129&" Remove this "String" constructor(‰¯»ð
-6
-java:S2129'" Remove this "String" constructor(¸àŠß
-S	java:S106("9Replace this use of System.out or System.err by a logger.(½ß’Šýÿÿÿÿ
-t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¢ð¼Øùÿÿÿÿ
