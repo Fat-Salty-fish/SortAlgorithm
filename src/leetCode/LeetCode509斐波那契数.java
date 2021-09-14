@@ -1,13 +1,10 @@
 package leetCode;
 
-import java.util.Currency;
-import java.util.regex.Pattern;
-
 /**
  * @author acer
  * @Date 2019/8/24 13:57
  */
-public class LeetCode509 {
+public class LeetCode509斐波那契数 {
     public int fib(int N) {
         if (N == 0) {
             return 0;
@@ -40,7 +37,31 @@ public class LeetCode509 {
         }
     }
 
+    /**
+     * 三刷斐波那契数
+     * 带dp数组
+     *
+     * @param n
+     * @return
+     */
+    public int fib3(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        int[] dp = new int[n+1];
+        dp[0] = 0;
+        dp[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
+    }
+
+
     public static void main(String[] args) {
-        System.out.println(new LeetCode509().fib2(4));
+        System.out.println(new LeetCode509斐波那契数().fib2(4));
     }
 }

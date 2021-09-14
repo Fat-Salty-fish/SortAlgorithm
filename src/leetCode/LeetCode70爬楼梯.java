@@ -4,7 +4,7 @@ package leetCode;
  * @author acer
  * @Date 2019/7/25 15:33
  */
-public class LeetCode70 {
+public class LeetCode70爬楼梯 {
     //    假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
 //
 //每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
@@ -46,10 +46,10 @@ public class LeetCode70 {
             return 2;
         } else {
             int i = 3;
-            int[] array = new int[n+1];
+            int[] array = new int[n + 1];
 //            array[1]=1;
             int temp1 = 1;
-            int temp2 = 2 ;
+            int temp2 = 2;
 //            array[2]=2;
             int ans = 0;
             while (i <= n) {
@@ -64,7 +64,64 @@ public class LeetCode70 {
         }
     }
 
+    /**
+     * 三刷爬楼梯
+     *
+     * @param n
+     * @return
+     */
+    public int climbStairs3(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        // 定义dp[n] 意为爬n阶楼梯时 有dp[n]种方法 取值范围 0<=i<=n
+        int[] dp = new int[n + 1];
+        // 初始化dp
+        dp[0] = 0;
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i <= n; i++) {
+            // 每到一个阶梯总有两种方法 即一步上来或者两步上来 dp[i] = dp[i-1]+dp[i-2]
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
+    }
+
+
+    /**
+     * 缩减dp规模
+     *
+     * @param n
+     * @return
+     */
+    public int climbStairs4(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int num1 = 1;
+        int num2 = 2;
+        int result = num1 + num2;
+        for (int i = 3; i <= n; i++) {
+            result = num1 + num2;
+            num1 = num2;
+            num2 = result;
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
-        System.out.println(new LeetCode70().climbStairs2(5  ));
+        System.out.println(new LeetCode70爬楼梯().climbStairs2(5));
     }
 }
