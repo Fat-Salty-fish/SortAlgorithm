@@ -18,10 +18,10 @@ public class LeetCode213打家劫舍II {
      * @return
      */
     public int rob(int[] nums) {
-        if (nums == null || nums.length == 0){
+        if (nums == null || nums.length == 0) {
             return 0;
         }
-        if (nums.length == 1){
+        if (nums.length == 1) {
             return nums[0];
         }
         return Math.max(help(nums, 0, nums.length - 2), help(nums, 1, nums.length - 1));
@@ -43,6 +43,48 @@ public class LeetCode213打家劫舍II {
             secondNum = temp;
         }
         return temp;
+    }
+
+    /**
+     * 二刷打家劫舍II
+     * 动态规划特训
+     *
+     * @param nums
+     * @return
+     */
+    public int rob2(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        if (nums.length == 1){
+            return nums[0];
+        }
+        return Math.max(robHelp(nums, 0, nums.length - 2), robHelp(nums, 1, nums.length - 1));
+    }
+
+
+    public int robHelp(int[] nums, int startIndex, int endIndex) {
+        if (nums == null || nums.length == 0 || startIndex > endIndex) {
+            return 0;
+        }
+        if (startIndex == endIndex) {
+            return nums[startIndex];
+        }
+        if (startIndex < 0) {
+            startIndex = 0;
+        }
+        if (endIndex > nums.length - 1) {
+            endIndex = nums.length - 1;
+        }
+        int firstNum = 0;
+        int secondNum = nums[startIndex];
+        int result = 0;
+        for (int i = startIndex + 1; i <= endIndex; i++) {
+            result = Math.max(firstNum + nums[i], secondNum);
+            firstNum = secondNum;
+            secondNum = result;
+        }
+        return result;
     }
 
     public static void main(String[] args) {

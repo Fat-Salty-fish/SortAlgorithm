@@ -67,11 +67,65 @@ public class LeetCode1143最长公共子序列 {
                 int temp = dp[j];
                 if (text1.charAt(i - 1) == text2.charAt(j - 1)) {
                     // 此时的pre相当于dp[j-1]
-                    dp[j] = pre+ 1;
+                    dp[j] = pre + 1;
                 } else {
                     dp[j] = Math.max(dp[j], dp[j - 1]);
                 }
                 // 一次for循环之后 更新dp[j-1]
+                pre = temp;
+            }
+        }
+        return dp[text2.length()];
+    }
+
+
+    /**
+     * 动态规划特训
+     * 二刷
+     * 定义dp[i][j]
+     * 表示a字符串前i个字符、b字符串前j个字符下
+     * 最长子序列的长度
+     * 状态转移方程:
+     * if(a.charAt(i] == b.charAt(j))
+     * dp[i][j] = dp[i-1][j-1] + 1;
+     * else
+     * dp[i][j] = Math.max(dp[i-1][j],dp[i][j-1])
+     *
+     * @param text1
+     * @param text2
+     * @return
+     */
+    public int longestCommonSubsequence3(String text1, String text2) {
+        if (text1 == null || text2 == null || text1.length() == 0 || text2.length() == 0) {
+            return 0;
+        }
+//        int[][] dp = new int[text1.length() + 1][text2.length() + 1];
+//        // base case i/j分别为0时 没有字符能够匹配 均为0
+//        for (int i = 1; i <= text1.length(); i++) {
+//            for (int j = 1; j <= text2.length(); j++) {
+//                if (text1.charAt(i - 1) == text2.charAt(j - 1)) {
+//                    // 两字符相同时 dp[i][j] = dp[i-1][j-1] + 1 表示 不计算这两个字符的时候的最长子序列的长度 + 1
+//                    dp[i][j] = dp[i - 1][j - 1] + 1;
+//                } else {
+//                    // 两字符不相同时 dp[i][j] = Math.max(dp[i-1][j],dp[i][j-1]) 表示 等于不计算这两个字符任意一个字符的最长子序列的大小
+//                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+//                }
+//            }
+//        }
+//        return dp[text1.length()][text2.length()];
+        // 简化为一维dp
+        int[] dp = new int[text2.length() + 1];
+        // base case j = 0 时 dp[0] = 0 无须初始化
+
+        for (int i = 1; i <= text1.length(); i++) {
+            int pre = 0;
+            for (int j = 1; j <= text2.length(); j++) {
+                int temp = dp[j];
+                if (text1.charAt(i - 1) == text2.charAt(j - 1)) {
+                    dp[j] = pre + 1;
+                } else {
+                    dp[j] = Math.max(dp[j - 1], dp[j]);
+                }
                 pre = temp;
             }
         }

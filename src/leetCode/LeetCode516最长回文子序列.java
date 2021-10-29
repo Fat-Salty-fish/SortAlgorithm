@@ -43,4 +43,36 @@ public class LeetCode516最长回文子序列 {
         return dp[0][stringLength - 1];
     }
 
+    /**
+     * 动态规划特训
+     * 这个是回文子序列 不是回文子串 所以dp[i][j] = dp[i+1][j-1] +2 (当s.charAt(i)==s.charAt(j))时
+     * 如果是回文子串 则需要定义booleanDp[i][j] 表示(i,j)下的子串是否为回文子串
+     *
+     * @param s
+     * @return
+     */
+    public int longestPalindromeSubseq2(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        if (s.length() == 1) {
+            return 1;
+        }
+        int stringLength = s.length();
+        int[][] dp = new int[stringLength][stringLength];
+        for (int i = 0; i < stringLength; i++) {
+            dp[i][i] = 1;
+        }
+        for (int i = stringLength - 1; i >= 0; i--) {
+            for (int j = i + 1; j < stringLength; j++) {
+                if (s.charAt(i) == s.charAt(j)) {
+                    dp[i][j] = dp[i + 1][j - 1] + 2;
+                } else {
+                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return dp[0][stringLength - 1];
+    }
+
 }

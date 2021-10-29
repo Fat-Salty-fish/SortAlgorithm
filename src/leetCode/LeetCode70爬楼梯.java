@@ -121,6 +121,33 @@ public class LeetCode70爬楼梯 {
         return result;
     }
 
+    /**
+     * 动态规划特训 5刷
+     *
+     * @param n
+     * @return
+     */
+    public int climbStairs5(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        int first = 1;
+        int second = 2;
+        int result = second;
+        for (int i = 3; i <= n; i++) {
+            result = first + second;
+            first = second;
+            second = result;
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         System.out.println(new LeetCode70爬楼梯().climbStairs2(5));
     }
