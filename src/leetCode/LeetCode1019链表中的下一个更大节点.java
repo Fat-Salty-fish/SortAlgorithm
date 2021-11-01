@@ -8,7 +8,7 @@ import java.util.Stack;
  * @author acer
  * @Date 2019/9/3 15:25
  */
-public class LeetCode1019 {
+public class LeetCode1019链表中的下一个更大节点 {
     public int[] nextLargerNodes(ListNode head) {
         Stack<Integer> stack = new Stack<>();
         List<Integer> array = new ArrayList<>();
@@ -41,6 +41,6 @@ public class LeetCode1019 {
         ListNode head = new ListNode(2);
         head.next = new ListNode(1);
         head.next.next = new ListNode(5);
-        new LeetCode1019().nextLargerNodes(head);
+        new LeetCode1019链表中的下一个更大节点().nextLargerNodes(head);
     }
 }
