@@ -105,7 +105,7 @@ public class LeetCode494目标和 {
         // 如果nums[i-1] > j 则不选择 方案数 dp[i][j] = dp[i-1][j]
         // 如果nums[i-1] <= j 则可以选择 方案数 dp[i][j] = dp[i-1][j-nums[i-1]] + dp[i-1][j]
         for (int i = 1; i <= nums.length; i++) {
-            int num = nums[i-1];
+            int num = nums[i - 1];
             for (int j = 0; j <= negative; j++) {
                 dp[i][j] = dp[i - 1][j];
                 if (j >= num) {
@@ -122,10 +122,52 @@ public class LeetCode494目标和 {
     }
 
 
+    /**
+     * 三刷
+     * 动态规划
+     * 设为正数的是a 负数的是b 和为sum
+     * 即 a= sum - b
+     * (sum-b)-b = target
+     * b = (sum-target)/2
+     * 即在nums里找到一些数 使得和为(sum-target)/2
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int findTargetSumWays3(int[] nums, int target) {
+        int sum = 0;
+        for (int a : nums) {
+            sum += a;
+        }
+        if (sum < target) {
+            return 0;
+        }
+        if ((sum - target) % 2 != 0) {
+            return 0;
+        }
+        int sub = (sum - target) / 2;
+        int[][] dp = new int[nums.length + 1][sub + 1];
+        // base case j == 0时 算一种方法
+        for (int i = 0; i <= nums.length; i++) {
+            dp[i][0] = 1;
+        }
+        for (int i = 1; i <= nums.length; i++) {
+            for (int j = 0; j <= sub; j++) {
+                dp[i][j] = dp[i - 1][j];
+                if (nums[i-1] <= j) {
+                    dp[i][j] += dp[i - 1][j - nums[i - 1]];
+                }
+            }
+        }
+        return dp[nums.length][sub];
+    }
+
+
     public static void main(String[] args) {
-        int[] nums = {1, 1, 1, 1, 1};
-        int target = 3;
-        int result = new LeetCode494目标和().findTargetSumWays2(nums, target);
+        int[] nums = {1, 0};
+        int target = 1;
+        int result = new LeetCode494目标和().findTargetSumWays3(nums, target);
         System.out.println(result);
     }
 }

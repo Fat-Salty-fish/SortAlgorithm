@@ -1,5 +1,7 @@
 package leetCode;
 
+import java.util.Arrays;
+
 /**
  * @author lizhongjie
  * @desc
@@ -31,6 +33,8 @@ public class LeetCode518零钱兑换II {
             for (int j = 1; j <= amount; j++) {
                 if (coins[i - 1] <= j) {
                     dp[i][j] = dp[i - 1][j] + dp[i][j - coins[i - 1]];
+                } else {
+                    dp[i][j] = dp[i - 1][j];
                 }
             }
         }
@@ -66,5 +70,49 @@ public class LeetCode518零钱兑换II {
                 deep(currentAmount - coin, coins);
             }
         }
+    }
+
+    /**
+     * 二刷零钱兑换2
+     * 动态规划
+     *
+     * @param amount
+     * @param coins
+     * @return
+     */
+    public int change2(int amount, int[] coins) {
+        if (amount == 0) {
+            return 1;
+        }
+        int coinNum = coins.length;
+        Arrays.sort(coins);
+        // 总值小于硬币的最小值 肯定无法实现
+        if (amount < coins[0]) {
+            return 0;
+        }
+        // 表示在使用coinNum下 并且凑金额为amount时 有dp[coinNum][amount]种方案
+        int[][] dp = new int[coinNum][amount + 1];
+        // amount = 1时 方法数为1
+        for (int i = 0; i < coinNum; i++) {
+            dp[i][0] = 1;
+        }
+        for (int i = 0; i < coinNum; i++) {
+            int currentCoin = coins[i];
+            for (int j = 1; j <= amount; j++) {
+                if (currentCoin <= j) {
+                    dp[i][j] = i > 0 ? dp[i - 1][j] + dp[i][j - currentCoin] : dp[i][j - currentCoin];
+                } else {
+                    dp[i][j] = i > 0 ? dp[i - 1][j] : 0;
+                }
+            }
+        }
+        return dp[coinNum - 1][amount];
+    }
+
+    public static void main(String[] args) {
+        int[] array = {1, 2, 5};
+        int amount = 5;
+        int result = new LeetCode518零钱兑换II().change(amount, array);
+        System.out.println("结果为:" + result);
     }
 }

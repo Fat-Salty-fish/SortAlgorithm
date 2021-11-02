@@ -1,5 +1,7 @@
 package leetCode;
 
+import java.util.Arrays;
+
 /**
  * @author lizhongjie
  * @desc
@@ -142,10 +144,47 @@ public class LeetCode416分割等和子集 {
         return dp[nums.length][half];
     }
 
+    /**
+     * 4刷
+     * 动态规划
+     * 元素和相同 就是能否取得一系列数能够达到所有数的一半
+     *
+     * @param nums
+     * @return
+     */
+    public boolean canPartition4(int[] nums) {
+        Arrays.sort(nums);
+        int sum = 0;
+        for (int each : nums) {
+            sum += each;
+        }
+        if (sum % 2 != 0) {
+            return false;
+        }
+        // 总数的一半
+        int half = sum / 2;
+        int numLength = nums.length;
+        boolean[][] dp = new boolean[numLength + 1][half + 1];
+        // base case j==0时 i不论为多少 结果均为true
+        for (int i = 0; i <= numLength; i++) {
+            dp[i][0] = true;
+        }
+        for (int i = 1; i <= numLength; i++) {
+            for (int j = 1; j <= half; j++) {
+                if (nums[i - 1] <= j) {
+                    dp[i][j] = dp[i - 1][j - nums[i - 1]] || dp[i - 1][j];
+                } else {
+                    dp[i][j] = dp[i - 1][j];
+                }
+            }
+        }
+        return dp[numLength][half];
+    }
+
 
     public static void main(String[] args) {
         int[] nums = {2, 2, 1, 1};
-        boolean result = new LeetCode416分割等和子集().canPartition(nums);
+        boolean result = new LeetCode416分割等和子集().canPartition4(nums);
         System.out.printf("结果" + result);
     }
 }
