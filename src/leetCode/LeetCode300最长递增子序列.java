@@ -100,9 +100,57 @@ public class LeetCode300最长递增子序列 {
         return max;
     }
 
+    /**
+     * 用二分查找解决LIS问题
+     * 修改dp定义：dp[i]表示长度为i时的递增子序列的最后一个元素值为多少
+     *
+     * @param nums
+     * @return
+     */
+    public int lengthOfLIS4(int[] nums) {
+        int numLength = nums.length;
+        int lastIndex = 0;
+        int[] dp = new int[numLength];
+
+        for (int i = 0; i < numLength; i++) {
+            int currentNum = nums[i];
+            int index = findIndexOfFirstBiggerThanTarget(dp, currentNum, lastIndex);
+            if (index == lastIndex) {
+                lastIndex++;
+            }
+            dp[index] = currentNum;
+        }
+        return lastIndex;
+    }
+
+    /**
+     * 这里找的是什么数？
+     * 找的应该是第一个比target大的元素 这是寻找左边界还是寻找右边界？
+     * 应该是寻找左边界
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int findIndexOfFirstBiggerThanTarget(int[] nums, int target, int lastIndex) {
+        int left = 0;
+        int right = lastIndex;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                right = mid;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else if (nums[mid] > target) {
+                right = mid;
+            }
+        }
+        return left;
+    }
+
     public static void main(String[] args) {
-        int[] nums = {10, 9, 2, 5, 3, 7, 101, 18};
-        int length = new LeetCode300最长递增子序列().lengthOfLIS3(nums);
+        int[] nums = {7, 7, 7, 7, 7, 7};
+        int length = new LeetCode300最长递增子序列().lengthOfLIS4(nums);
         System.out.println(length);
     }
 }

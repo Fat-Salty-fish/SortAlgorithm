@@ -5,10 +5,10 @@ package leetCode;
  * @Date 2019/7/2 18:28
  */
 public class ListNode {
-    int val;
-    ListNode next;
+    public int val;
+    public ListNode next;
 
-    ListNode(int x) {
+    public ListNode(int x) {
         val = x;
     }
 }

@@ -1,14 +1,10 @@
 package leetCode;
 
-import sun.awt.HeadlessToolkit;
-
-import javax.xml.stream.FactoryConfigurationError;
-
 /**
  * @author acer
  * @Date 2019/7/24 23:27
  */
-public class LeetCode11 {
+public class LeetCode11盛最多水的容器 {
 //    给定 n 个非负整数 a1，a2，...，an，每个数代表坐标中的一个点 (i, ai) 。
 //    在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。
 //    找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。
@@ -64,9 +60,32 @@ public class LeetCode11 {
         return res;
     }
 
+    /**
+     * 三刷
+     * 动态规划行不通。。。。
+     * 还是用双指针吧
+     * @param height
+     * @return
+     */
+    public int maxArea3(int[] height){
+        int result = 0;
+        int left = 0;
+        int right = height.length-1;
+        while (left < right){
+            int width = right-left;
+            result = Math.max(result,width * Math.min(height[left],height[right]));
+            if (height[left] < height[right]){
+                left++;
+            }else {
+                right--;
+            }
+        }
+        return result;
+    }
+
 
     public static void main(String[] args) {
-        LeetCode11 leetCode11 = new LeetCode11();
-        System.out.println(leetCode11.maxArea(new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7}));
+        LeetCode11盛最多水的容器 leetCode11盛最多水的容器 = new LeetCode11盛最多水的容器();
+        System.out.println(leetCode11盛最多水的容器.maxArea(new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7}));
     }
 }

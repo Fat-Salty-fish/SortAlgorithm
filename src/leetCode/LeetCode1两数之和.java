@@ -60,8 +60,27 @@ public class LeetCode1两数之和 {
         return result;
     }
 
+    /**
+     * 三刷
+     * 直接想到的方法就是n方的for循环
+     * 时间复杂度最低为n 即使用map 保存nums[i]和i的对应关系即可 详见方法一
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] twoSum3(int[] nums, int target) {
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return new int[2];
+    }
+
     public static void main(String[] args) {
-        int[] array = {3,2,4};
+        int[] array = {3, 2, 4};
         int target = 6;
         int[] result = new LeetCode1两数之和().twoSum2(array, target);
         System.out.println(result);

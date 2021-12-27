@@ -109,10 +109,32 @@ public class LeetCode518零钱兑换II {
         return dp[coinNum - 1][amount];
     }
 
+    /**
+     * 零钱兑换
+     * 动态规划解决
+     *
+     * @param amount
+     * @param coins
+     * @return
+     */
+    public int change3(int amount, int[] coins) {
+        int[] planDp = new int[amount + 1];
+        planDp[0] = 1;
+        for (int j = 0; j < coins.length; j++) {
+            for (int i = 1; i <= amount; i++) {
+                int currentCoin = coins[j];
+                if (currentCoin <= i) {
+                    planDp[i] += planDp[i - currentCoin];
+                }
+            }
+        }
+        return planDp[amount];
+    }
+
     public static void main(String[] args) {
         int[] array = {1, 2, 5};
         int amount = 5;
-        int result = new LeetCode518零钱兑换II().change(amount, array);
+        int result = new LeetCode518零钱兑换II().change3(amount, array);
         System.out.println("结果为:" + result);
     }
 }

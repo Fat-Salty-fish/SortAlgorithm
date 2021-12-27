@@ -1,14 +1,12 @@
 package leetCode;
 
-import javax.lang.model.element.ElementKind;
-import javax.swing.plaf.SliderUI;
 import java.util.Stack;
 
 /**
  * @author acer
  * @Date 2019/9/3 19:28
  */
-public class LeetCode503下一个更大元素2 {
+public class LeetCode503下一个更大元素II {
     public int[] nextGreaterElements(int[] nums) {
         //环状的数组 可以认为是将原来的一个数组复制一次拼接过来
         int[] ans = new int[nums.length];
@@ -29,6 +27,6 @@ public class LeetCode503下一个更大元素2 {
     }
 
     public static void main(String[] args) {
-        new LeetCode503下一个更大元素2().nextGreaterElements(new int[]{1, 2, 1, 3, 1, 4, 5, 3, 5, 7, 3});
+        new LeetCode503下一个更大元素II().nextGreaterElements(new int[]{1, 2, 1, 3, 1, 4, 5, 3, 5, 7, 3});
     }
 }

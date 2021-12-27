@@ -8,7 +8,7 @@ import java.util.Stack;
  * @author acer
  * @Date 2019/9/3 19:47
  */
-public class LeetCode496下一个更大元素1 {
+public class LeetCode496下一个更大元素I {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         int[] ans = new int[nums1.length];
         Stack<Integer> stack = new Stack<>();
@@ -35,7 +35,7 @@ public class LeetCode496下一个更大元素1 {
 
 
     public static void main(String[] args) {
-        for (int a : new LeetCode496下一个更大元素1().nextGreaterElement(new int[]{3,4,2}, new int[]{1, 3, 4, 2})) {
+        for (int a : new LeetCode496下一个更大元素I().nextGreaterElement(new int[]{3,4,2}, new int[]{1, 3, 4, 2})) {
             System.out.println(a);
         }
     }

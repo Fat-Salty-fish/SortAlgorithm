@@ -1,12 +1,6 @@
 package leetCode;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import sortFunctions.HeapSort;
-import sun.plugin.liveconnect.OriginNotAllowedException;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Stack;
 
 /**
@@ -187,6 +181,37 @@ public class LeetCode42接雨水 {
             }
         }
         return res;
+    }
+
+    /**
+     * 实际上是二刷？
+     * 动态规划
+     * 左边第一个和右边第一个不可能存水
+     *
+     * @param height
+     * @return
+     */
+    public int trap7(int[] height) {
+        // 从左到i的最大值
+        int[] left = new int[height.length];
+        // 从右到i的最大值
+        int[] right = new int[height.length];
+        Arrays.fill(left, -1);
+        Arrays.fill(right, -1);
+        for (int i = 1; i < height.length; i++) {
+            left[i] = Math.max(left[i - 1], height[i - 1]);
+        }
+        for (int i = height.length - 2; i >= 0; i--) {
+            right[i] = Math.max(right[i + 1], height[i + 1]);
+        }
+        int result = 0;
+        for (int i = 1; i < height.length - 1; i++) {
+            int min = Math.min(left[i], right[i]);
+            if (min > height[i]) {
+                result += min - height[i];
+            }
+        }
+        return result;
     }
 
 }

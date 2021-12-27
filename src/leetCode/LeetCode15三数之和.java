@@ -1,5 +1,6 @@
 package leetCode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,9 +42,72 @@ public class LeetCode15三数之和 {
         return ans;
     }
 
-    // 二刷三数之和 总体思路：双指针
-    // 其实和923题类似 只不过是目标和为0 相当于target为0
-//    public List<List<Integer>> threeSum2(int nums[]){
-//
-//    }
+
+    /**
+     * 2刷三数之和
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> threeSum2(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            result.addAll(sumTwoNum(nums, -nums[i], i + 1, nums[i]));
+            int currentNum = nums[i];
+            // 这里其实会少加一 但是运行成功是因为for循环里最后还要i++
+            while (i < nums.length - 1 && nums[i] == nums[i + 1]) {
+                i++;
+            }
+        }
+        return result;
+    }
+
+
+    /**
+     * 两数之和
+     * 数组已经提前排序过
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> sumTwoNum(int[] nums, int target, int startIndex, int currentFather) {
+        int left = startIndex;
+        int right = nums.length - 1;
+        List<List<Integer>> result = new ArrayList<>();
+        while (left < right) {
+            int sum = nums[left] + nums[right];
+            int low = nums[left];
+            int high = nums[right];
+            if (sum == target) {
+                List<Integer> list = new ArrayList<>();
+                list.add(nums[left]);
+                list.add(nums[right]);
+                list.add(currentFather);
+                result.add(list);
+                while (left < right && nums[left] == low) {
+                    left++;
+                }
+                while (left < right && nums[right] == high) {
+                    right--;
+                }
+            } else if (sum < target) {
+                while (left < right && nums[left] == low) {
+                    left++;
+                }
+            } else {
+                while (left < right && nums[right] == high) {
+                    right--;
+                }
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] array = new int[]{-1, 0, 1, 2, -1, -4};
+        List<List<Integer>> result = new LeetCode15三数之和().threeSum2(array);
+        System.out.println("运行结束了" + result);
+    }
 }

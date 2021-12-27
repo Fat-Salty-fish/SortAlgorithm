@@ -38,6 +38,7 @@ public class LeetCode53最大子序和 {
      * 递推公式 f(i) = Math.max(f(i-1)+num[i],num[i])
      * 然后遍历整个dp即可得出最大子序和
      * 可见可以缩减动态规划dp大小
+     *
      * @param nums
      * @return
      */
@@ -63,6 +64,7 @@ public class LeetCode53最大子序和 {
      * dp[i]表示以nums[i-1]为结尾的子数组的最大和(nums[i-1]是因为索引得-1
      * dp[i] = Math.max(dp[i-1]+nums[i-1],nums[i-1])
      * 特点：是以i为结尾的子数组
+     *
      * @param nums
      * @return
      */
@@ -77,6 +79,26 @@ public class LeetCode53最大子序和 {
         for (int i = 2; i <= nums.length; i++) {
             dp[i] = Math.max(dp[i - 1] + nums[i - 1], nums[i - 1]);
             max = Math.max(dp[i], max);
+        }
+        return max;
+    }
+
+    /**
+     * 压缩dp数组
+     *
+     * @param nums
+     * @return
+     */
+    public int maxSubArray4(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int length = nums.length;
+        int dp = nums[0];
+        int max = dp;
+        for (int i = 1; i < nums.length; i++) {
+            dp = Math.max(nums[i], nums[i] + dp);
+            max = Math.max(max, dp);
         }
         return max;
     }

@@ -1,6 +1,8 @@
 package leetCode;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author lizhongjie
@@ -72,5 +74,57 @@ public class LeetCode524通过删除字母匹配到字典里最长单词 {
             }
         }
         return a;
+    }
+
+
+    /**
+     * 动态规划？
+     * 设dp[i][j]表示s中i位置之后j字符第一次出现的位置
+     *
+     * @param s
+     * @param dictionary
+     * @return
+     */
+    public String findLongestWord2(String s, List<String> dictionary) {
+        int length = s.length();
+        int[][] sIndex = new int[length + 1][26];
+        Arrays.fill(sIndex[length], length);
+        for (int i = length - 1; i >= 0; i--) {
+            for (int j = 0; j < 26; j++) {
+                if (s.charAt(i) - 'a' == j) {
+                    sIndex[i][j] = i;
+                } else {
+                    sIndex[i][j] = sIndex[i + 1][j];
+                }
+            }
+        }
+
+        String result = "";
+        for (String current : dictionary) {
+            boolean match = true;
+            int j = 0;
+            for (int i = 0; i < current.length(); i++) {
+                if (sIndex[j][current.charAt(i) - 'a'] == length) {
+                    match = false;
+                    break;
+                }
+                j = sIndex[j][current.charAt(i) - 'a'] + 1;
+            }
+            if (match){
+                if (current.length() > result.length() || (current.length() == result.length() && current.compareTo(result) < 0)){
+                    result = current;
+                }
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        String a = "abpcplea";
+
+        String[] array = {"ale","apple","monkey","plea"};
+        List<String> list = Arrays.stream(array).collect(Collectors.toList());
+        String result = new LeetCode524通过删除字母匹配到字典里最长单词().findLongestWord2(a,list);
+        System.out.println(result);
     }
 }

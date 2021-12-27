@@ -4,7 +4,7 @@ package leetCode;
  * @author acer
  * @Date 2019/8/23 10:31
  */
-public class LeetCode167 {
+public class LeetCode167两数之和II输入有序数组 {
     public int[] twoSum(int[] numbers, int target) {
         int[] ans = new int[2];
         for (int i = 0; i < numbers.length; i++) {
@@ -43,7 +43,7 @@ public class LeetCode167 {
     }
 
     public static void main(String[] args) {
-        int[] array = new LeetCode167().twoPointer(new int[]{2,7,11,15},9);
+        int[] array = new LeetCode167两数之和II输入有序数组().twoPointer(new int[]{2,7,11,15},9);
         for(int a : array){
             System.out.print(a);
         }

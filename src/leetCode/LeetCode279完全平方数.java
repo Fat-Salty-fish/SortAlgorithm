@@ -1,5 +1,7 @@
 package leetCode;
 
+import java.util.Arrays;
+
 /**
  * @author lizhongjie
  * @desc
@@ -21,6 +23,7 @@ public class LeetCode279完全平方数 {
             return 1;
         }
         int[] dp = new int[n + 1];
+        Arrays.fill(dp,Integer.MAX_VALUE);
         dp[0] = 0;
         dp[1] = 1;
         // 遍历从1-i的平方根的所有数
@@ -29,6 +32,7 @@ public class LeetCode279完全平方数 {
             for (int j = 1; j * j <= i; j++) {
                 min = Math.min(min, dp[i - j * j]);
             }
+            // 加1是因为选中了一个当前元素
             dp[i] = min + 1;
         }
         return dp[n];
