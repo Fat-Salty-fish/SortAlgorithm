@@ -1,6 +1,7 @@
 package leetCode;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author lizhongjie
@@ -27,14 +28,39 @@ public class LeetCode3无重复字符的最长子串 {
                 left++;
             }
             right++;
-            result = Math.max(result,right-left);
+            result = Math.max(result, right - left);
         }
         return result;
     }
 
+    /**
+     * 二刷
+     *
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring2(String s) {
+        Map<Character, Integer> charMap = new HashMap<>();
+        int left = 0;
+        int right = 0;
+        int length = Integer.MIN_VALUE;
+        while (right < s.length()) {
+            Character currentRight = s.charAt(right);
+            right++;
+            charMap.put(currentRight, charMap.getOrDefault(currentRight, 0) + 1);
+            while (charMap.get(currentRight) > 1) {
+                Character currentLeftChar = s.charAt(left);
+                charMap.put(currentLeftChar, charMap.get(currentLeftChar) - 1);
+                left ++;
+            }
+            length = Math.max(length,right-left);
+        }
+        return length == Integer.MIN_VALUE? 0 : length;
+    }
+
     public static void main(String[] args) {
         String s = "abcabcbb";
-        int result = new LeetCode3无重复字符的最长子串().lengthOfLongestSubstring(s);
+        int result = new LeetCode3无重复字符的最长子串().lengthOfLongestSubstring2(s);
         System.out.println(result);
     }
 }

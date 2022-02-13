@@ -67,6 +67,23 @@ public class LeetCode206反转链表 {
         return reverseNext;
     }
 
+    /**
+     * 另一种反转链表的方法
+     * @param head
+     * @return
+     */
+    public ListNode reverseList4(ListNode head){
+        ListNode pre = null;
+        ListNode next = null;
+        while (head != null){
+            next = head.next;
+            head.next = pre;
+            pre = head;
+            head = next;
+        }
+        return pre;
+    }
+
     public static void main(String[] args) {
         ListNode node1 = new ListNode(1);
         ListNode node2 = new ListNode(2);

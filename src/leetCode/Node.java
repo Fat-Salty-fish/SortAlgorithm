@@ -1,5 +1,8 @@
 package leetCode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author acer
  * @Date 2019/7/29 21:46
@@ -10,6 +13,8 @@ class Node {
     public Node right;
     public Node next;
     public Node random;
+    public List<Node> neighbors = new ArrayList<>();
+    public Node parent;
 
     public Node() {
     }
@@ -24,4 +29,9 @@ class Node {
         right = _right;
         next = _next;
     }
-};
+
+    public Node(int _val, ArrayList<Node> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
+    }
+}

@@ -33,6 +33,17 @@ public class LeetCode316 {
         return builder.toString();
     }
 
+    /**
+     * 单调栈训练
+     * @param s
+     * @return
+     */
+    public String removeDuplicateLetters2(String s) {
+        StringBuilder builder = new StringBuilder();
+
+        return builder.toString();
+    }
+
     public static void main(String[] args) {
         System.out.println(new LeetCode316().removeDuplicateLetters("bcabc"));
     }

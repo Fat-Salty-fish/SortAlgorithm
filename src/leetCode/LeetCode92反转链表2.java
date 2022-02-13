@@ -57,7 +57,7 @@ public class LeetCode92反转链表2 {
         if (m == 1) {
             return reverseFromHead(head, n);
         }
-        head.next  =  reverseBetween2(head.next, m - 1, n - 1);
+        head.next = reverseBetween2(head.next, m - 1, n - 1);
         return head;
     }
 
@@ -76,6 +76,7 @@ public class LeetCode92反转链表2 {
     /**
      * 头条面试 三刷反转链表
      * 思路 先找到左边界 再反转到N
+     *
      * @param head
      * @param m
      * @param n
@@ -98,21 +99,62 @@ public class LeetCode92反转链表2 {
 
     /**
      * 从头开始反转 反转到第n个 返回头节点
+     *
      * @param head
      * @param n
      * @return
      */
-    public ListNode reverseToN(ListNode head,int n){
-        if (n == 1){
+    public ListNode reverseToN(ListNode head, int n) {
+        if (n == 1) {
             headLeftNode = head.next;
             return head;
         }
-        ListNode nextHead = reverseToN(head.next,n-1);
+        ListNode nextHead = reverseToN(head.next, n - 1);
         // 这个是反转链表的精髓 当前节点的next的节点的next指针 要指向当前节点 实现了反转 其实只需要反转当前节点即可
         head.next.next = head;
         // 当前节点会作为反转链表之后的最后一个节点 next节点直接指向剩余链表的头节点
         head.next = headLeftNode;
         return nextHead;
+    }
+
+    /**
+     * 程序员面试指南
+     * 再刷
+     *
+     * @param head
+     * @param left
+     * @param right
+     * @return
+     */
+    public ListNode reverseBetween4(ListNode head, int left, int right) {
+        int length = 0;
+        ListNode fromMinus = null;
+        ListNode toPlus = null;
+        ListNode temp = head;
+        while (temp != null) {
+            length++;
+            fromMinus = length == left - 1 ? temp : fromMinus;
+            toPlus = length == right + 1 ? temp : toPlus;
+            temp = temp.next;
+        }
+        if (left > right || left < 1 || right > length) {
+            return head;
+        }
+        temp = fromMinus == null ? head : fromMinus.next;
+        ListNode temp2 = temp.next;
+        temp.next = toPlus;
+        ListNode next = null;
+        while (temp2 != toPlus) {
+            next = temp2.next;
+            temp2.next = temp;
+            temp = temp2;
+            temp2 = next;
+        }
+        if (fromMinus != null) {
+            fromMinus.next = temp;
+            return head;
+        }
+        return temp;
     }
 
 
@@ -126,7 +168,7 @@ public class LeetCode92反转链表2 {
         node2.next = node3;
         node3.next = node4;
         node4.next = node5;
-        ListNode result = new LeetCode92反转链表2().reverseBetween2(node1, 2, 4);
+        ListNode result = new LeetCode92反转链表2().reverseBetween4(node1, 2, 4);
         while (result != null) {
             System.out.println(result.val);
             result = result.next;

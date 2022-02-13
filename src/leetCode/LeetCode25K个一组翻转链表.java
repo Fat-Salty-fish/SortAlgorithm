@@ -1,8 +1,6 @@
 package leetCode;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class LeetCode25K个一组翻转链表 {
     public ListNode reverseKGroup(ListNode head, int k) {
@@ -180,7 +178,7 @@ public class LeetCode25K个一组翻转链表 {
             return null;
         }
         // 此时不用反转
-        if (n == 1){
+        if (n == 1) {
             nextNode = head.next;
             head.next = null;
             return head;
@@ -193,9 +191,63 @@ public class LeetCode25K个一组翻转链表 {
             // 当前节点会作为这段反转链表的最后一个节点 所以必须将下一个节点指向下一段的头节点
             head.next = nextNode;
             return reversedHead;
-        }else {
+        } else {
             return head;
         }
+    }
+
+    /**
+     * 四刷 用栈解决
+     *
+     * @param head
+     * @param k
+     * @return
+     */
+    public ListNode reverseKGroup4(ListNode head, int k) {
+        if (k <= 1) {
+            return head;
+        }
+        Deque<ListNode> stack = new ArrayDeque<>();
+        ListNode oriHead = null;
+        ListNode lastTail = null;
+        ListNode current = head;
+        ListNode result = null;
+        while (current != null) {
+            ListNode tempNext = current.next;
+            stack.push(current);
+            if (stack.size() == 1) {
+                oriHead = current;
+            }
+            if (stack.size() == k) {
+                ListNode next = current.next;
+                ListNode reversedListHead = reverseListFromStack(stack);
+                if (lastTail == null) {
+                    result = reversedListHead;
+                } else {
+                    lastTail.next = reversedListHead;
+                }
+                lastTail = oriHead;
+                lastTail.next = next;
+            }
+            current = tempNext;
+        }
+        return result;
+    }
+
+    /**
+     * 从栈内反转链表
+     *
+     * @param stack
+     * @return
+     */
+    public ListNode reverseListFromStack(Deque<ListNode> stack) {
+        ListNode dummyNode = new ListNode(-1);
+        ListNode temp = dummyNode;
+        while (!stack.isEmpty()) {
+            temp.next = stack.pop();
+            temp = temp.next;
+        }
+        return dummyNode.next;
     }
 
 
@@ -210,7 +262,7 @@ public class LeetCode25K个一组翻转链表 {
         node3.next = node4;
         node4.next = node5;
         LeetCode25K个一组翻转链表 leetcode = new LeetCode25K个一组翻转链表();
-        ListNode node = leetcode.reverseKGroup3(node1, 2);
+        ListNode node = leetcode.reverseKGroup4(node1, 2);
         System.out.println(node.val);
     }
 }

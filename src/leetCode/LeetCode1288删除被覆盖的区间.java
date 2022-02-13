@@ -1,6 +1,8 @@
 package leetCode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author lizhongjie
@@ -37,5 +39,26 @@ public class LeetCode1288删除被覆盖的区间 {
             }
         }
         return count;
+    }
+
+    /**
+     * 二刷
+     *
+     * @param intervals
+     * @return
+     */
+    public int removeCoveredIntervals2(int[][] intervals) {
+        List<int[]> arrayList = new ArrayList<>();
+        Arrays.sort(intervals, ((o1, o2) -> o1[0] == o2[0] ? o2[1] - o1[1] : o1[0] - o2[0]));
+        int left = 0;
+        int right = 0;
+        while (right < intervals.length) {
+            while (right < intervals.length && intervals[left][0] <= intervals[right][0] && intervals[left][1] >= intervals[right][1]) {
+                right++;
+            }
+            arrayList.add(intervals[left]);
+            left = right;
+        }
+        return arrayList.size();
     }
 }

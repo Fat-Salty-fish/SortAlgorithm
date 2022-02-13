@@ -103,9 +103,41 @@ public class LeetCode53最大子序和 {
         return max;
     }
 
+    /**
+     * 如果要记录最大子序和的范围呢？
+     * 用start记录
+     * @param nums
+     * @return
+     */
+    public int maxSubArray5(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int length = nums.length;
+        int dp = nums[0];
+        int max = dp;
+        int start = 0;
+        // 用于记录开始和结束
+        int[] result = new int[2];
+        for (int i = 1; i < length; i++) {
+            if (dp < 0){
+                dp = nums[i];
+                start = i;
+            }else {
+                dp = dp + nums[i];
+            }
+            if (dp > max){
+                max = dp;
+                result[0] = start;
+                result[1] = i;
+            }
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
-        int result = new LeetCode53最大子序和().maxSubArray2(nums);
+        int result = new LeetCode53最大子序和().maxSubArray5(nums);
         System.out.println(result);
     }
 }

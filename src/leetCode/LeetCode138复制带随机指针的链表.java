@@ -13,11 +13,11 @@ public class LeetCode138复制带随机指针的链表 {
     /**
      * 用来保存对应节点
      */
-    public Map<Node,Node> nodeMapForRandom = new HashMap<>();
+    public Map<Node, Node> nodeMapForRandom = new HashMap<>();
 
 
     public Node copyRandomList(Node head) {
-        if (head == null ){
+        if (head == null) {
             return null;
         }
         // 复制原链表是容易的 问题在于如何复制原链表内的随机指针节点
@@ -25,14 +25,50 @@ public class LeetCode138复制带随机指针的链表 {
         Node newNode = new Node(head.val);
         nodeMapForRandom.put(head, newNode);
         newNode.next = copyRandomList(head.next);
-        if (head.random == null){
+        if (head.random == null) {
             newNode.random = null;
-        }else if (head.random == head){
+        } else if (head.random == head) {
             newNode.random = newNode;
-        }else {
+        } else {
             newNode.random = nodeMapForRandom.get(head.random);
         }
         return newNode;
+    }
+
+    /**
+     * 复制带有随机指针的节点
+     * 空间复杂度为O1
+     *
+     * @param head
+     * @return
+     */
+    public Node copyRandomList2(Node head) {
+        Node temp = head;
+        while (temp != null) {
+            Node next = temp.next;
+            temp.next = new Node(temp.val);
+            temp.next.next = next;
+            temp = next;
+        }
+        temp = head;
+        while (temp != null) {
+            Node next = temp.next.next;
+            if (temp.random != null) {
+                temp.next.random = temp.random.next;
+            }
+            temp = next;
+        }
+        temp = head;
+        Node dummyNode = new Node(-1);
+        Node currentNode = dummyNode;
+        while (temp != null) {
+            Node next = temp.next.next;
+            currentNode.next = temp.next;
+            temp.next = next;
+            temp = next;
+            currentNode = currentNode.next;
+        }
+        return dummyNode.next;
     }
 
     public static void main(String[] args) {
@@ -50,7 +86,7 @@ public class LeetCode138复制带随机指针的链表 {
         node3.random = node5;
         node4.random = node3;
         node5.random = node1;
-        Node result = new LeetCode138复制带随机指针的链表().copyRandomList(node1);
+        Node result = new LeetCode138复制带随机指针的链表().copyRandomList2(node1);
         System.out.println(result.val);
     }
 }

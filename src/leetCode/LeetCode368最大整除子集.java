@@ -52,6 +52,17 @@ public class LeetCode368最大整除子集 {
         return result;
     }
 
+    /**
+     * 类似于最长递增子序列
+     * 微软模拟面试 没做出来 。。。。
+     * 难受
+     * @param nums
+     * @return
+     */
+    public List<Integer> largestDivisibleSubset2(int[] nums) {
+        return null;
+    }
+
     public static void main(String[] args) {
         int[] array = {1,2,4,8};
         List<Integer> result = new LeetCode368最大整除子集().largestDivisibleSubset(array);

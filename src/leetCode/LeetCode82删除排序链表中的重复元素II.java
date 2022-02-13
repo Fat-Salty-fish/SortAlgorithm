@@ -1,7 +1,5 @@
 package leetCode;
 
-import java.util.Objects;
-
 /**
  * @author lizhongjie
  * @desc
@@ -20,6 +18,7 @@ public class LeetCode82删除排序链表中的重复元素II {
      * 删除排序链表里的重复元素 留下只出现一次的节点
      * 用三个指针 第一个指针为结果指针 dummyNode
      * 第二个指针和第三个指针用来形成组合？
+     *
      * @param head
      * @return
      */
@@ -53,8 +52,37 @@ public class LeetCode82删除排序链表中的重复元素II {
         return result.next;
     }
 
+    /**
+     * 微软模拟面试
+     *
+     * @param head
+     * @return
+     */
+    public ListNode deleteDuplicates2(ListNode head) {
+        ListNode dummyNode = new ListNode(-1);
+        ListNode result = dummyNode;
+        ListNode currentNode = head;
+        while (currentNode != null) {
+            if (currentNode.next == null || (currentNode.val != currentNode.next.val)) {
+                dummyNode.next = currentNode;
+                dummyNode = dummyNode.next;
+                currentNode = currentNode.next;
+            } else {
+                int val = currentNode.val;
+                while (currentNode != null && currentNode.val == val) {
+                    currentNode = currentNode.next;
+                }
+                if (currentNode == null) {
+                    break;
+                }
+            }
+        }
+        dummyNode.next = null;
+        return result.next;
+    }
+
     public static void main(String[] args) {
-        int[] nums = new int[]{1,1, 2, 3, 3, 4, 4, 5};
+        int[] nums = new int[]{1, 1, 2, 3, 3, 4, 4, 5};
         ListNode node = new ListNode(-1);
         ListNode result = node;
         for (int a : nums) {
@@ -62,7 +90,7 @@ public class LeetCode82删除排序链表中的重复元素II {
             node.next = currentNode;
             node = node.next;
         }
-        ListNode myResult = new LeetCode82删除排序链表中的重复元素II().deleteDuplicates(result.next);
+        ListNode myResult = new LeetCode82删除排序链表中的重复元素II().deleteDuplicates2(result.next);
         while (myResult != null) {
             System.out.println(myResult.val);
             myResult = myResult.next;
