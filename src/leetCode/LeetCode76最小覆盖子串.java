@@ -120,10 +120,55 @@ public class LeetCode76最小覆盖子串 {
         return resultLeft == -1 ? "" : s.substring(resultLeft, resultLeft + length);
     }
 
+
+    /**
+     * 三刷 双指针能否完成？应该是可以
+     * 双指针 如果全部匹配了字符 则视为结果之一 那么如何继续遍历？left应该从哪一步开始继续向后遍历？
+     *
+     * @param s
+     * @param t
+     * @return
+     */
+    public String minWindow3(String s, String t) {
+        if (s.length() < t.length()) {
+            return "";
+        }
+        Map<Character, Integer> targetMap = new HashMap<>();
+        // 统计target需要的字符类型以及字符数量
+        for (char temp : t.toCharArray()) {
+            targetMap.put(temp, targetMap.getOrDefault(temp, 0) + 1);
+        }
+        int left = 0;
+        int right = 0;
+        String result = "";
+        int match = t.length();
+        int minLength = Integer.MAX_VALUE;
+        while (right < s.length()) {
+            targetMap.put(s.charAt(right), targetMap.getOrDefault(s.charAt(right), 0) - 1);
+            if (targetMap.get(s.charAt(right)) >= 0) {
+                match--;
+            }
+            if (match == 0) {
+                while (targetMap.get(s.charAt(left)) < 0) {
+                    targetMap.put(s.charAt(left), targetMap.get(s.charAt(left++)) + 1);
+                }
+                if (right - left + 1 < minLength) {
+                    minLength = right - left + 1;
+                    result = s.substring(left, right + 1);
+                }
+                match++;
+                targetMap.put(s.charAt(left), targetMap.get(s.charAt(left++)) + 1);
+            }
+            right++;
+        }
+        return minLength == Integer.MAX_VALUE ? "" : result;
+    }
+
+
     public static void main(String[] args) {
         String a = "ADOBECODEBANC";
         String b = "ABC";
-        String result = new LeetCode76最小覆盖子串().minWindow2(a, b);
+        String result = new LeetCode76最小覆盖子串().minWindow3(a, b);
         System.out.println(result);
     }
 }

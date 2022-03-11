@@ -125,6 +125,72 @@ public class LeetCode227基本计算器II {
         }
     }
 
+    /**
+     * 三刷
+     *
+     * @param s
+     * @return
+     */
+    public int calculate3(String s) {
+        s = s.replaceAll(" ", "");
+        int index = 0;
+        int pre = 0;
+        LinkedList<String> formula = new LinkedList<>();
+        while (index < s.length()) {
+            if (s.charAt(index) >= '0' && s.charAt(index) <= '9') {
+                pre = pre * 10 + s.charAt(index++) - '0';
+            } else {
+                addNum(formula, pre);
+                formula.addLast(String.valueOf(s.charAt(index++)));
+                pre = 0;
+            }
+        }
+        addNum(formula, pre);
+        return getResult(formula);
+    }
+
+    /**
+     * 向方程里添加数字
+     *
+     * @param formula
+     * @param num
+     */
+    public void addNum(LinkedList<String> formula, int num) {
+        if (!formula.isEmpty()) {
+            String symbol = formula.pollLast();
+            if ("+".equals(symbol) || "-".equals(symbol)) {
+                formula.addLast(symbol);
+            } else {
+                int pre = Integer.parseInt(formula.pollLast());
+                num = "*".equals(symbol) ? pre * num : pre / num;
+            }
+        }
+        formula.addLast(String.valueOf(num));
+    }
+
+    /**
+     * 将方程式转换为结果
+     *
+     * @param formula
+     * @return
+     */
+    public int getResult(LinkedList<String> formula) {
+        int result = 0;
+        boolean plus = true;
+        while (!formula.isEmpty()) {
+            String poll = formula.pollFirst();
+            if ("+".equals(poll)) {
+                plus = true;
+            } else if ("-".equals(poll)) {
+                plus = false;
+            } else {
+                int num = Integer.parseInt(poll);
+                result += plus ? num : (-num);
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         System.out.println(new LeetCode227基本计算器II().calculate2("3+2*2"));
         LinkedList<Integer> list = new LinkedList();

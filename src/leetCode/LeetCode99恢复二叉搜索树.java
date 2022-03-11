@@ -1,8 +1,6 @@
 package leetCode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -79,6 +77,36 @@ public class LeetCode99恢复二叉搜索树 {
             root.val = firstNum;
         }
         fix(root.right, firstNum, secondNum);
+    }
+
+    /**
+     * 二刷 直接改变值
+     * 优化了中序遍历
+     * 简化寻找两个节点的过程：第一个错误节点为第一次遇到降序时较大的节点 第二个错误节点为最后一次遇到降序时较小的节点
+     *
+     * @param root
+     */
+    public void recoverTree2(TreeNode root) {
+        TreeNode[] array = new TreeNode[2];
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode pre = null;
+        TreeNode node = root;
+        while (!stack.isEmpty() || node != null) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+            node = stack.pop();
+            if (pre != null && pre.val > node.val) {
+                array[0] = array[0] == null ? pre : array[0];
+                array[1] = node;
+            }
+            pre = node;
+            node = node.right;
+        }
+        int temp = array[0].val;
+        array[0].val = array[1].val;
+        array[1].val = temp;
     }
 
     public static void main(String[] args) {

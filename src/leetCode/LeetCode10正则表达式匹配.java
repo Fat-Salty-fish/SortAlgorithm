@@ -136,10 +136,68 @@ public class LeetCode10正则表达式匹配 {
         return dp[targetLength][patternLength];
     }
 
+    /**
+     * 四刷 动态规划 包含字符串检测
+     *
+     * @param s
+     * @param p
+     * @return
+     */
+    public boolean isMatch4(String s, String p) {
+        if (!valid(s, p)) {
+            return false;
+        }
+        boolean[][] dp = new boolean[s.length() + 1][p.length() + 1];
+        dp[0][0] = true;
+        for (int j = 1; j <= p.length(); j++) {
+            if (p.charAt(j - 1) == '*') {
+                dp[0][j] = dp[0][j - 2];
+            }
+        }
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = 1; j <= p.length(); j++) {
+                // 判断是否使用当前字符(用来匹配)
+                if (p.charAt(j - 1) == '*') {
+                    // 可以消耗掉
+                    if (p.charAt(j - 2) == s.charAt(i - 1) || p.charAt(j - 2) == '.') {
+                        dp[i][j] = dp[i - 1][j];
+                    }
+                    dp[i][j] = dp[i][j] || dp[i][j - 2];
+                } else if (p.charAt(j - 1) == '.') {
+                    // 如果当前字符为.那么可以直接消耗掉当前字符 dp[i][j] = dp[i-1][j-2]
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else if (p.charAt(j - 1) == s.charAt(i - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                }
+            }
+        }
+        return dp[s.length()][p.length()];
+    }
+
+    /**
+     * 检查字符串是否合法
+     *
+     * @param s
+     * @param p
+     */
+    public boolean valid(String s, String p) {
+        for (char temp : s.toCharArray()) {
+            if (!(temp >= 'a' && temp <= 'z')) {
+                return false;
+            }
+        }
+        for (char temp : s.toCharArray()) {
+            if (!(temp >= 'a' && temp <= 'z') && temp != '*' && temp != '.') {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         String str = "aa";
-        String match = "ab*ac*";
-        boolean check = new LeetCode10正则表达式匹配().isMatch3(str, match);
+        String match = "a*";
+        boolean check = new LeetCode10正则表达式匹配().isMatch4(str, match);
         System.out.println(check);
     }
 }

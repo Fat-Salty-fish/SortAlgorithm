@@ -250,6 +250,39 @@ public class LeetCode25K个一组翻转链表 {
         return dummyNode.next;
     }
 
+    /**
+     * 分组反转链表
+     * 每1个、2个、3个、4个反转 如果没有到个数就不反转
+     *
+     * @param head
+     * @return
+     */
+    public ListNode reverseAsGroupIncreased(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        Deque<ListNode> stack = new ArrayDeque<>();
+        ListNode currentNode = head.next;
+        int groupNum = 2;
+        ListNode pre = head;
+        ListNode next = null;
+        while (currentNode != null) {
+            stack.push(currentNode);
+            next = currentNode.next;
+            if (stack.size() == groupNum) {
+                while (!stack.isEmpty()) {
+                    ListNode temp = stack.pop();
+                    pre.next = temp;
+                    pre = temp;
+                }
+                pre.next = next;
+                groupNum++;
+            }
+            currentNode = next;
+        }
+        return head;
+    }
+
 
     public static void main(String[] args) {
         ListNode node1 = new ListNode(1);
@@ -257,12 +290,21 @@ public class LeetCode25K个一组翻转链表 {
         ListNode node3 = new ListNode(3);
         ListNode node4 = new ListNode(4);
         ListNode node5 = new ListNode(5);
+        ListNode node6 = new ListNode(6);
+        ListNode node7 = new ListNode(7);
+        ListNode node8 = new ListNode(8);
         node1.next = node2;
         node2.next = node3;
         node3.next = node4;
         node4.next = node5;
+        node5.next = node6;
+        node6.next = node7;
+        node7.next = node8;
         LeetCode25K个一组翻转链表 leetcode = new LeetCode25K个一组翻转链表();
-        ListNode node = leetcode.reverseKGroup4(node1, 2);
-        System.out.println(node.val);
+        ListNode node = leetcode.reverseAsGroupIncreased(node1);
+        while (node != null) {
+            System.out.println(node.val);
+            node = node.next;
+        }
     }
 }

@@ -122,4 +122,46 @@ public class LeetCode72编辑距离 {
     public int minOfThreeNums(int num1, int num2, int num3) {
         return Math.min(Math.min(num1, num2), num3);
     }
+
+
+    /**
+     * 最小编辑距离
+     *
+     * @param word1
+     * @param word2
+     * @return
+     */
+    public int minDistance4(String word1, String word2) {
+        int leftLength = word1.length();
+        int rightLength = word2.length();
+        // 表示word1的前i位变为word2的前j位 最少需要多少步
+        int[][] dp = new int[leftLength + 1][rightLength + 1];
+        // 需要直接删除
+        for (int i = 1; i <= leftLength; i++) {
+            dp[i][0] = i;
+        }
+        // 需要直接插入
+        for (int i = 1; i <= rightLength; i++) {
+            dp[0][i] = i;
+        }
+        for (int i = 1; i <= leftLength; i++) {
+            for (int j = 1; j <= rightLength; j++) {
+                // 不需要处理
+                if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    // 必须要添加一个字符或者删除一个字符来匹配j
+                    dp[i][j] = Math.min(Math.min(dp[i][j - 1], dp[i - 1][j]), dp[i - 1][j - 1]) + 1;
+                }
+            }
+        }
+        return dp[leftLength][rightLength];
+    }
+
+    public static void main(String[] args) {
+        String a = "horse";
+        String b = "ros";
+        int result = new LeetCode72编辑距离().minDistance4(a, b);
+        System.out.println("结果：" + result);
+    }
 }

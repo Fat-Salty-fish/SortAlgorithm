@@ -68,4 +68,37 @@ public class LeetCode97交错字符串 {
         }
         return dp[s1.length()][s2.length()];
     }
+
+    /**
+     * 交错字符串
+     * s3里的字符必须存在于s1或s2中
+     * 是否需要三维dp？
+     * 不需要 因为s3内的字符全部来自于s1和s2 所以只需要看前i个s1的字符和前j个s2的字符能否组成前i+j个s3的字符
+     * @param s1
+     * @param s2
+     * @param s3
+     * @return
+     */
+    public boolean isInterleave3(String s1, String s2, String s3) {
+        if (s3.length() != s1.length() + s2.length()) {
+            return false;
+        }
+        int s1Length = s1.length();
+        int s2Length = s2.length();
+        boolean[][] dp = new boolean[s1Length + 1][s2Length + 1];
+        dp[0][0] = true;
+        for (int i = 1; i <= s1Length; i++) {
+            dp[i][0] = s1.substring(0, i).equals(s3.substring(0, i));
+        }
+        for (int i = 1; i <= s2.length(); i++) {
+            dp[0][i] = s2.substring(0, i).equals(s3.substring(0, i));
+        }
+        for (int i = 1; i <= s1Length; i++) {
+            for (int j = 1; j <= s2Length; j++) {
+                int s3Index = i + j - 1;
+                dp[i][j] = (dp[i - 1][j] && (s1.charAt(i - 1) == s3.charAt(s3Index))) || (dp[i][j - 1] && (s2.charAt(j - 1) == s3.charAt(s3Index)));
+            }
+        }
+        return dp[s1Length][s2Length];
+    }
 }

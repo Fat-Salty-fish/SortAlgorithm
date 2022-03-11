@@ -85,9 +85,46 @@ public class LeetCode55跳跃游戏 {
         return false;
     }
 
+    /**
+     * 四刷
+     * 动态规划？ 时间复杂度太高了
+     *
+     * @param nums
+     * @return
+     */
+    public boolean canJump4(int[] nums) {
+        boolean[] dp = new boolean[nums.length];
+        dp[0] = true;
+        for (int i = 0; i < nums.length; i++) {
+            int current = nums[i];
+            if (dp[i]) {
+                for (int plus = 1; plus <= current; plus++) {
+                    if (i + plus < nums.length)
+                        dp[i + plus] = true;
+                }
+            }
+        }
+        return dp[nums.length - 1];
+    }
+
+    /**
+     * 四刷后 使用贪心算法 只需要保存当前能够到达的最远下标即可
+     *
+     * @param nums
+     */
+    public boolean canJump5(int[] nums) {
+        int far = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i <= far) {
+                far = Math.max(far, i + nums[i]);
+            }
+        }
+        return far >= nums.length - 1;
+    }
+
     public static void main(String[] args) {
-        int[] array = new int[]{0, 1};
-        boolean result = new LeetCode55跳跃游戏().canJump2(array);
+        int[] array = new int[]{2, 3, 1, 1, 4};
+        boolean result = new LeetCode55跳跃游戏().canJump4(array);
         System.out.println(result);
     }
 }

@@ -148,9 +148,66 @@ public class LeetCode300最长递增子序列 {
         return left;
     }
 
+    /**
+     * 5刷最长递增子序列 每次做都有新的体会
+     * 学习连接：https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
+     * 二分查找：找到比A[i]小的最大值的已有序列
+     * 用一个tail[]数组来保存已有序列的最后一个元素
+     *
+     * @param nums
+     * @return
+     */
+    public int lengthOfLIS5(int[] nums) {
+        int length = nums.length;
+        int[] tailTable = new int[length];
+        tailTable[0] = nums[0];
+        // 永远指向空闲区域
+        int freeIndex = 1;
+        for (int i = 1; i < nums.length; i++) {
+            int currentNum = nums[i];
+            // 如果当前值是最大值 则新建一个序列
+            if (currentNum > tailTable[freeIndex - 1]) {
+                tailTable[freeIndex++] = currentNum;
+            } else if (currentNum <= tailTable[0]) {
+                tailTable[0] = currentNum;
+            } else {
+                int index = getIndex(tailTable, currentNum, 0, freeIndex - 1);
+                if (index >= 0) {
+                    tailTable[index + 1] = currentNum;
+                }
+            }
+        }
+        return freeIndex;
+    }
+
+    /**
+     * 在min和max这俩index之间找到比target小的最大的值 这样就可以保证有序?
+     *
+     * @param array
+     * @param target
+     * @param min
+     * @param max
+     * @return
+     */
+    public int getIndex(int[] array, int target, int min, int max) {
+        int left = min;
+        int right = max;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (array[mid] < target) {
+                left = mid + 1;
+            } else if (array[mid] > target) {
+                right = mid - 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return right;
+    }
+
     public static void main(String[] args) {
-        int[] nums = {7, 7, 7, 7, 7, 7};
-        int length = new LeetCode300最长递增子序列().lengthOfLIS4(nums);
-        System.out.println(length);
+        int[] nums = {1, 2, 3, 3, 4, 5, 7, 8};
+        int length = new LeetCode300最长递增子序列().lengthOfLIS5(nums);
+        System.out.println(nums[length]);
     }
 }

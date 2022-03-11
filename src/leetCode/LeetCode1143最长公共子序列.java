@@ -132,6 +132,29 @@ public class LeetCode1143最长公共子序列 {
         return dp[text2.length()];
     }
 
+    /**
+     * 四刷
+     *
+     * @param text1
+     * @param text2
+     * @return
+     */
+    public int longestCommonSubsequence4(String text1, String text2) {
+        int leftLength = text1.length();
+        int rightLength = text2.length();
+        int[][] dp = new int[leftLength + 1][rightLength + 1];
+        for (int i = 1; i <= leftLength; i++) {
+            for (int j = 1; j <= rightLength; j++) {
+                if (text1.charAt(i - 1) == text2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return dp[leftLength][rightLength];
+    }
+
     public static void main(String[] args) {
         String a = "abce";
         String b = "def";
