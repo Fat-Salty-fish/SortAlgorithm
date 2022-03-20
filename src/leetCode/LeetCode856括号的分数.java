@@ -1,5 +1,7 @@
 package leetCode;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 /**
@@ -26,16 +28,50 @@ public class LeetCode856括号的分数 {
     public int deep(String S) {
         int ans = 0;
         int deepth = 0;
-        for (int i = 0;i<S.length();i++) {
-            if(S.charAt(i) == '('){
+        for (int i = 0; i < S.length(); i++) {
+            if (S.charAt(i) == '(') {
                 deepth++;
-            }else {
+            } else {
                 deepth--;
-                if(S.charAt(i-1) == '('){
-                    ans += 1<<deepth;
+                if (S.charAt(i - 1) == '(') {
+                    ans += 1 << deepth;
                 }
             }
         }
         return ans;
+    }
+
+    /**
+     * 微软模拟面试 实话说 不太会
+     * 尝试用栈解决把
+     *
+     * @param s
+     * @return
+     */
+    public int scoreOfParentheses2(String s) {
+        Deque<Integer> deque = new ArrayDeque<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '('){
+                deque.push(0);
+            }else {
+                if (s.charAt(i-1) == '('){
+                    deque.pop();
+                    deque.push(1);
+                }else {
+                    int temp = 0;
+                    while (!deque.isEmpty() && deque.peek()!= 0){
+                        temp += deque.pop();
+                    }
+                    temp *= 2;
+                    deque.pop();
+                    deque.push(temp);
+                }
+            }
+        }
+        int result = 0;
+        while (!deque.isEmpty()){
+            result += deque.pop();
+        }
+        return result;
     }
 }

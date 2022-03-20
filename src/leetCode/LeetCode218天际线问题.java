@@ -45,8 +45,54 @@ public class LeetCode218天际线问题 {
         return result;
     }
 
+    /**
+     * 二刷天际线问题 扫描线
+     *
+     * @param buildings
+     * @return
+     */
+    public List<List<Integer>> getSkyline2(int[][] buildings) {
+        List<List<Integer>> result = new ArrayList<>();
+        int[][] builds = new int[buildings.length * 2][2];
+        int index = 0;
+        for (int[] build : buildings) {
+            int[] left = {build[0], build[2]};
+            int[] right = {build[1], -build[2]};
+            builds[index++] = left;
+            builds[index++] = right;
+        }
+        Arrays.sort(builds, ((o1, o2) -> o1[0] == o2[0] ? o2[1] - o1[1] : o1[0] - o2[0]));
+        PriorityQueue<Integer> pq = new PriorityQueue<>(((o1, o2) -> o2 - o1));
+        for (int[] array : builds) {
+            if (array[1] > 0) {
+                if (pq.isEmpty() || array[1] > pq.peek()) {
+                    List<Integer> point = new ArrayList<>();
+                    point.add(array[0]);
+                    point.add(array[1]);
+                    result.add(point);
+                }
+                pq.offer(array[1]);
+            } else {
+                pq.remove(-array[1]);
+                if (pq.isEmpty() || pq.peek() < -array[1]) {
+                    List<Integer> point = new ArrayList<>();
+                    point.add(array[0]);
+                    point.add(pq.isEmpty() ? 0 : pq.peek());
+                    result.add(point);
+                }
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
-        int[][] buildings = {{0,2,3},{2,5,3}};
-        List<List<Integer>> result = new LeetCode218天际线问题().getSkyline(buildings);
+        int[][] buildings = {{2, 9, 10}, {3, 7, 15}, {5, 12, 12}, {15, 20, 10}, {19, 24, 8}};
+        List<List<Integer>> result = new LeetCode218天际线问题().getSkyline2(buildings);
+        for (List<Integer> array : result) {
+            for (int a : array) {
+                System.out.print(a + " ");
+            }
+            System.out.println();
+        }
     }
 }

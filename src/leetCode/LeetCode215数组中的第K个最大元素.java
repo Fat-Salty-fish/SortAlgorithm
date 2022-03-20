@@ -1,13 +1,12 @@
 package leetCode;
 
-import java.lang.reflect.Array;
 import java.util.PriorityQueue;
 
 /**
  * @author acer
  * @Date 2019/8/17 16:40
  */
-public class LeetCode215 {
+public class LeetCode215数组中的第K个最大元素 {
     public int findKthLargest(int[] nums, int k) {
         PriorityQueue<Integer> queue = new PriorityQueue<>((n1, n2) -> n1 - n2);
 
@@ -68,7 +67,25 @@ public class LeetCode215 {
         nums[r] = temp;
     }
 
+    /**
+     * 三刷
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int findKthLargest3(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for (int temp : nums) {
+            pq.offer(temp);
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+        return pq.poll();
+    }
+
     public static void main(String[] args) {
-        System.out.println(new LeetCode215().findKthLargest(new int[]{1,2,3,4,5},2));
+        System.out.println(new LeetCode215数组中的第K个最大元素().findKthLargest(new int[]{1, 2, 3, 4, 5}, 2));
     }
 }
