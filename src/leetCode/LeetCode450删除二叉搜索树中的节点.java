@@ -53,4 +53,100 @@ public class LeetCode450删除二叉搜索树中的节点 {
         }
         return root;
     }
+
+    /**
+     * 二刷 为了解决微软模拟面试问题
+     *
+     * @param root
+     * @param key
+     * @return
+     */
+    public TreeNode deleteNode2(TreeNode root, int key) {
+        return deleteWithReturnValue(root, key).resultRoot;
+    }
+
+    /**
+     * 微软M365面试
+     * 返回的是布尔值
+     *
+     * @param root
+     * @param key
+     * @return
+     */
+    public boolean deleteNodeReturnBoolean(TreeNode root, int key) {
+        return deleteWithReturnValue(root, key).deleted;
+    }
+
+    /**
+     * 返回值包含删除后的根节点以及是否已经删除了
+     *
+     * @param root
+     * @param key
+     * @return
+     */
+    public ReturnValue deleteWithReturnValue(TreeNode root, int key) {
+        if (root == null) {
+            ReturnValue returnValue = new ReturnValue();
+            returnValue.deleted = false;
+            returnValue.resultRoot = null;
+            return returnValue;
+        }
+        if (key < root.val) {
+            ReturnValue returnValue = deleteWithReturnValue(root.left, key);
+            root.left = returnValue.resultRoot;
+            ReturnValue temp = new ReturnValue();
+            temp.resultRoot = root;
+            temp.deleted = returnValue.deleted;
+            return temp;
+        } else if (key > root.val) {
+            ReturnValue returnValue = deleteWithReturnValue(root.right, key);
+            root.right = returnValue.resultRoot;
+            ReturnValue temp = new ReturnValue();
+            temp.resultRoot = root;
+            temp.deleted = returnValue.deleted;
+            return temp;
+        } else {
+            // 当前节点就是要删除的目标节点
+            // 如果左子树为空 则直接返回右子树
+            if (root.left == null) {
+                ReturnValue returnValue = new ReturnValue();
+                returnValue.resultRoot = root.right;
+                returnValue.deleted = true;
+                return returnValue;
+            } else if (root.right == null) {
+                ReturnValue returnValue = new ReturnValue();
+                returnValue.resultRoot = root.left;
+                returnValue.deleted = true;
+                return returnValue;
+            } else {
+                // 需要寻找左子树的最右节点 或者右子树的最左节点 这里选择左子树的最右节点
+                TreeNode lastOne = root.left;
+                TreeNode parentOfLastOne = root.left;
+                while (lastOne.right != null) {
+                    parentOfLastOne = lastOne;
+                    lastOne = lastOne.right;
+                }
+                parentOfLastOne.right = lastOne == parentOfLastOne ? null : lastOne.left;
+                lastOne.left = root.left == lastOne ? lastOne.left : root.left;
+                lastOne.right = root.right;
+                ReturnValue returnValue = new ReturnValue();
+                returnValue.resultRoot = lastOne;
+                returnValue.deleted = true;
+                return returnValue;
+            }
+        }
+    }
+
+    /**
+     * 删除目标节点的返回值
+     */
+    class ReturnValue {
+        public boolean deleted;
+
+        public TreeNode resultRoot;
+    }
+
+    public static void main(String[] args) {
+
+    }
 }
