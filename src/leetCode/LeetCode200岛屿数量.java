@@ -16,7 +16,6 @@ public class LeetCode200岛屿数量 {
     /**
      * 尝试dfs
      * 遍历所有的数 如果遇到1 则dfs这个数旁边的四个数 并将旁边的数都置为1
-     * YUDAO YU
      *
      * @param grid
      * @return
@@ -57,5 +56,45 @@ public class LeetCode200岛屿数量 {
         dfs(grid, x - 1, y);
         dfs(grid, x, y + 1);
         dfs(grid, x, y - 1);
+    }
+
+    /**
+     * 岛屿数量 二刷
+     *
+     * @param grid
+     * @return
+     */
+    public int numIslands2(char[][] grid) {
+        int result = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid.length; j++) {
+                if (grid[i][j] == 1) {
+                    result++;
+                    change(grid,i,j);
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 把为1的岛屿变成0
+     *
+     * @param grid
+     * @param x
+     * @param y
+     */
+    public void change(char[][] grid, int x, int y) {
+        if (x > grid.length || x < 0 || y > grid[0].length || y < 0) {
+            return;
+        }
+        if (grid[x][y] == 0) {
+            return;
+        }
+        grid[x][y] = 1;
+        change(grid, x + 1, y);
+        change(grid, x - 1, y);
+        change(grid, x, y + 1);
+        change(grid, x, y - 1);
     }
 }

@@ -7,7 +7,7 @@ import leetCode.ListNode;
  * @desc
  * @create_time 2021/12/3
  */
-public class AimToOfferII026重排链表 {
+public class AimToOffer026重排链表 {
 
     /**
      * 重排链表
@@ -81,7 +81,7 @@ public class AimToOfferII026重排链表 {
         fourth.next = fifth;
 //        ListNode head = new II026重排链表().reverse(first);
 //        System.out.println(head.val);
-        new AimToOfferII026重排链表().reorderList(first);
+        new AimToOffer026重排链表().reorderList(first);
         System.out.println("成功了");
     }
 }

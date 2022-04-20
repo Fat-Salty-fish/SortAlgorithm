@@ -5,7 +5,7 @@ package aimToOfferII;
  * @desc
  * @create_time 2022/2/26
  */
-public class AimToOfferII45把数字翻译成字符串 {
+public class AimToOffer45把数字翻译成字符串 {
 
     /**
      * dp函数开辟了长度为n的数组
@@ -37,7 +37,7 @@ public class AimToOfferII45把数字翻译成字符串 {
 
     public static void main(String[] args) {
         int num = 0;
-        int result = new AimToOfferII45把数字翻译成字符串().translateNum(num);
+        int result = new AimToOffer45把数字翻译成字符串().translateNum(num);
         System.out.println(result);
     }
 }

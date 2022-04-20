@@ -7,7 +7,7 @@ import java.util.List;
  * @author acer
  * @Date 2019/7/29 21:46
  */
-class Node {
+public class Node {
     public int val;
     public Node left;
     public Node right;

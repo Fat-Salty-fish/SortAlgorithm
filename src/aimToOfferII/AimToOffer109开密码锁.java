@@ -7,7 +7,7 @@ import java.util.*;
  * @desc
  * @create_time 2022/1/3
  */
-public class AimToOfferII109开密码锁 {
+public class AimToOffer109开密码锁 {
 
     public Character[] nums = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
@@ -95,7 +95,7 @@ public class AimToOfferII109开密码锁 {
     public static void main(String[] args) {
         String[] strArray = {"0201", "0101", "0102", "1212", "2002"};
         String target = "0202";
-        AimToOfferII109开密码锁 test = new AimToOfferII109开密码锁();
+        AimToOffer109开密码锁 test = new AimToOffer109开密码锁();
         int result = test.openLock(strArray, target);
         System.out.println(result);
     }

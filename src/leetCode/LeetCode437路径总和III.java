@@ -1,7 +1,7 @@
 package leetCode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author lizhongjie
@@ -10,46 +10,81 @@ import java.util.List;
  */
 public class LeetCode437路径总和III {
     /**
-     * 用于表示结果
+     * 路径总和
+     *
+     * @param root
+     * @param targetSum
+     * @return
      */
-    int result = 0;
-
-    int finalTarget = 0;
-
-    public int pathSum(TreeNode root, int sum) {
+    public int pathSum(TreeNode root, int targetSum) {
         if (root == null) {
             return 0;
         }
-        finalTarget = sum;
-        findPath(root, sum);
+        int result = 0;
+        result += checkPath(root, targetSum);
+        result += pathSum(root.left, targetSum);
+        result += pathSum(root.right, targetSum);
         return result;
     }
 
-    List<List<Integer>> resultList = new ArrayList<>();
+
+    public int checkPath(TreeNode root, int targetSum) {
+        if (root == null) {
+            return 0;
+        }
+        int result = 0;
+        if (root.val == targetSum) {
+            result++;
+        }
+        if (root.left != null) {
+            result += checkPath(root.left, targetSum - root.val);
+        }
+        if (root.right != null) {
+            result += checkPath(root.right, targetSum - root.val);
+        }
+        return result;
+    }
 
     /**
-     * 寻找路径
-     * 对于每个节点 需要寻找两次
+     * 前缀和解决
+     *
      * @param root
-     * @param target
+     * @param targetSum
+     * @return
      */
-    public void findPath(TreeNode root, int target) {
+    public int pathSum2(TreeNode root, int targetSum) {
+        Map<Integer, Integer> prefixMap = new HashMap<>();
+        prefixMap.put(0, 1);
+        return prefix(root, targetSum, prefixMap, 0);
+    }
+
+    /**
+     * 用前缀和解决
+     *
+     * @param root
+     * @param targetSum
+     * @param prefixMap
+     * @param currentSum
+     * @return
+     */
+    public int prefix(TreeNode root, int targetSum, Map<Integer, Integer> prefixMap, int currentSum) {
         if (root == null) {
-            return;
+            return 0;
         }
-        int temp = target - root.val;
-//        currentList.add(root.val);
-        if (temp == 0) {
-            result += 1;
-//            resultList.add(new ArrayList<>(currentList));
+        int tempCurrent = currentSum + root.val;
+        int result = 0;
+        if (prefixMap.containsKey(tempCurrent - targetSum)) {
+            result += prefixMap.get(tempCurrent - targetSum);
         }
-        findPath(root.left, temp);
-        findPath(root.right, temp);
-        List<Integer> thisList = new ArrayList<>();
-        thisList.add(root.val);
-        // 这么写会导致节点值与目标值相同的情况可能会被多次执行 结果比预期结果更大
-        findPath(root.left, finalTarget);
-        findPath(root.right, finalTarget);
+        prefixMap.put(tempCurrent, prefixMap.getOrDefault(tempCurrent, 0) + 1);
+        result += prefix(root.left, targetSum, prefixMap, tempCurrent);
+        result += prefix(root.right, targetSum, prefixMap, tempCurrent);
+        if (prefixMap.get(tempCurrent) == 1) {
+            prefixMap.remove(tempCurrent);
+        } else {
+            prefixMap.put(tempCurrent, prefixMap.get(tempCurrent) - 1);
+        }
+        return result;
     }
 
     public static void main(String[] args) {
@@ -63,6 +98,6 @@ public class LeetCode437路径总和III {
         node2.right = node3;
         node1.right = node2;
 
-        System.out.println(new LeetCode437路径总和III().pathSum(node1,3));
+        System.out.println(new LeetCode437路径总和III().pathSum(node1, 3));
     }
 }
