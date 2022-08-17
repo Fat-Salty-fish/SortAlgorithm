@@ -1,6 +1,5 @@
 package leetCode;
 
-import jdk.nashorn.internal.objects.NativeUint8Array;
 
 import javax.swing.*;
 

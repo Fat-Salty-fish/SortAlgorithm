@@ -1,6 +1,5 @@
 package interviewGuide;
 
-import sun.tools.java.Scanner;
 
 /**
  * @author lizhongjie

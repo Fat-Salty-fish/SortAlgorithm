@@ -1,6 +1,5 @@
 package leetCode;
 
-import sun.plugin2.message.JavaScriptGetWindowMessage;
 
 import java.util.ArrayList;
 import java.util.Arrays;

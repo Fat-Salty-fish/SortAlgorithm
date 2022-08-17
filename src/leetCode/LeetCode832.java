@@ -1,6 +1,5 @@
 package leetCode;
 
-import sun.security.util.Length;
 
 /**
  * @author acer

@@ -1,6 +1,5 @@
 package leetCode;
 
-import com.sun.xml.internal.xsom.impl.util.SchemaTreeTraverser;
 
 /**
  * @author lizhongjie
