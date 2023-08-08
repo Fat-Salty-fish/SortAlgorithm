@@ -7,7 +7,7 @@ import java.util.Set;
  * @author acer
  * @Date 2019/8/11 22:53
  */
-public class LeetCode142II {
+public class LeetCode142环型链表II {
     public ListNode detectCycle(ListNode head) {
         ListNode ans = null;
         Set<ListNode> set = new HashSet<>();
@@ -28,6 +28,7 @@ public class LeetCode142II {
      * 拆分整个list 从链表头到环的头为x1 环的头到第一次相遇的点为x2 相遇的点到环的头为x3
      * 则 2(x1+x2)-(x1+x2) = x2+x3 得 x1=x3
      * 则只需要在第一次相遇时 慢节点回到链表头 同时快节点每次走1格即可
+     *
      * @param head
      * @return
      */
@@ -44,7 +45,7 @@ public class LeetCode142II {
                 // 另一个节点必须多走一步 因为返回头节点时相当于已经走了一步 即 头节点到环链表头的距离等于第一次相遇节点的下一个节点到环链表头的距离
                 firstNode = head;
                 secondNode = secondNode.next;
-                while (firstNode != secondNode){
+                while (firstNode != secondNode) {
                     firstNode = firstNode.next;
                     secondNode = secondNode.next;
                 }
@@ -52,6 +53,37 @@ public class LeetCode142II {
             }
             firstNode = firstNode.next;
             secondNode = secondNode.next.next;
+        }
+        return null;
+    }
+
+    /**
+     * 首先能想到的就是Map来维护之前见过的Node
+     * 如果要降低空间复杂度，则不能用Map来维护。
+     * 用快慢节点来实现。如果有环，则快节点一定和慢节点在某一处相遇
+     *
+     * @param head
+     * @return
+     */
+    public ListNode detectCycle3(ListNode head) {
+        if (head == null || head.next == null) {
+            return null;
+        }
+        ListNode fast = head.next;
+        ListNode slow = head;
+        // 找到相遇点
+        while (slow != null && fast != null && fast.next != null) {
+            if (fast == slow) {
+                slow = head;
+                fast = fast.next;
+                while (slow != fast) {
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+                return slow;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
         }
         return null;
     }
@@ -66,7 +98,7 @@ public class LeetCode142II {
         node3.next = node4;
         node4.next = node2;
 
-        ListNode result = new LeetCode142II().detectCycle2(node1);
+        ListNode result = new LeetCode142环型链表II().detectCycle3(node1);
 
     }
 }
