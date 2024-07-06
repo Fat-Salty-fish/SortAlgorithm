@@ -9,7 +9,7 @@ import java.util.LinkedList;
  */
 public class LeetCode706设计哈希映射 {
 
-    static class Pair {
+    private class Pair {
         int key;
         int value;
 
@@ -23,7 +23,7 @@ public class LeetCode706设计哈希映射 {
         }
     }
 
-    static class MyHashMap {
+    private class MyHashMap {
 
         /**
          * 存储数据
@@ -32,6 +32,7 @@ public class LeetCode706设计哈希映射 {
 
         /**
          * 一般寻找一个质数来作为base
+         * 为什么？
          */
         public final int base = 769;
 
@@ -91,7 +92,7 @@ public class LeetCode706设计哈希映射 {
     public static void main(String[] args) {
         int key = 970;
         int value = 538;
-        MyHashMap myHashMap = new MyHashMap();
-        myHashMap.put(key,value);
+//        MyHashMap myHashMap = new MyHashMap();
+//        myHashMap.put(key,value);
     }
 }

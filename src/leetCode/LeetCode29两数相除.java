@@ -1,5 +1,10 @@
 package leetCode;
 
+import java.awt.geom.Area;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
  * @author lizhongjie
  * @desc
@@ -66,7 +71,7 @@ public class LeetCode29两数相除 {
                 right = mid - 1;
             }
         }
-        if (needToReverse){
+        if (needToReverse) {
             result = -result;
         }
         return result;
@@ -106,11 +111,59 @@ public class LeetCode29两数相除 {
         return result == x;
     }
 
+    /**
+     * 忘了怎么做了都
+     * 官方题解 二分查找？
+     * 先考虑边界情况 最大值最小值
+     */
+    public int divide2(int dividend, int divisor) {
+        // 除数是0 结果为0
+        if (divisor == 0) {
+            return 0;
+        }
+        // 除数是1 直接返回
+        if (divisor == 1) {
+            return dividend;
+        }
+        // 除数是-1 并且被除数是最小值，那么直接除会溢出 返回最大值
+        if (dividend == Integer.MIN_VALUE && divisor == -1) {
+            return Integer.MAX_VALUE;
+        }
+        if (divisor == Integer.MAX_VALUE) {
+            if (dividend == Integer.MAX_VALUE) {
+                return 1;
+            }
+            return 0;
+        }
+
+        // 都用负数
+        // reverse用来表示结果是否需要反转
+        boolean reverse = false;
+        if (dividend > 0) {
+            dividend = -dividend;
+            reverse = !reverse;
+        }
+
+        if (divisor > 0) {
+            divisor = -divisor;
+            reverse = !reverse;
+        }
+
+        // 恐怖的二分查找
+        int left = 1, right = Integer.MAX_VALUE, ans = 0;
+        while (left <= right) {
+            int mid = left + ((right - left) >> 1);
+        }
+
+
+        return 0;
+    }
+
     public static void main(String[] args) {
-        int dividend = 10;
-        int divisor = 3;
-        int result = new LeetCode29两数相除().divide(dividend, divisor);
-        System.out.println("结果为:" + result);
+//        int dividend = 10;
+//        int divisor = 3;
+//        int result = new LeetCode29两数相除().divide(dividend, divisor);
+//        System.out.println("结果为:" + result);
 //
 //        int x = 9;
 //        int y = 3;
