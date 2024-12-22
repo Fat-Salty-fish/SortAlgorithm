@@ -3,6 +3,7 @@ package leetCode;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * @author lizhongjie
@@ -18,7 +19,7 @@ public class LeetCode107二叉树的层序遍历II {
      * @return
      */
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
-        if (root == null){
+        if (root == null) {
             return new ArrayList<>();
         }
         // 如何层序遍历？
@@ -58,5 +59,37 @@ public class LeetCode107二叉树的层序遍历II {
             order.add(0, currentLevel);
         }
         return order;
+    }
+
+    /**
+     * 层序遍历后反转数组即可
+     *
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrderBottom2(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        List<List<Integer>> result = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int currentSize = queue.size();
+            List<Integer> currentLevel = new ArrayList<>();
+            for (int i = 0; i < currentSize; i++) {
+                TreeNode temp = queue.poll();
+                currentLevel.add(temp.val);
+                if (temp.left != null) {
+                    queue.offer(temp.left);
+                }
+                if (temp.right != null) {
+                    queue.offer(temp.right);
+                }
+            }
+            result.add(currentLevel);
+        }
+        result = result.reversed();
+        return result;
     }
 }

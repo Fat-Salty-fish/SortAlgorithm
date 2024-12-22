@@ -73,14 +73,42 @@ public class LeetCode122买卖股票的最佳时机II {
         if (prices.length == 0 || prices.length == 1) {
             return 0;
         }
-        // dp[i][0] 表示第i天之后手里没有股票的最大利润 dp[i][1]表示第i天后手里没有股票的利润
+        // dp[i][0] 表示第i天之后手里没有股票的最大利润 dp[i][1]表示第i天后手里有股票的利润
         int[][] dp = new int[prices.length][2];
         dp[0][0] = 0;
         dp[0][1] = -prices[0];
         for (int i = 1; i < prices.length; i++) {
-            dp[i][0] = Math.max(dp[i-1][0],dp[i-1][1] + prices[i]);
-            dp[i][1] = Math.max(dp[i-1][1],dp[i-1][0] - prices[i]);
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
         }
-        return dp[prices.length-1][0];
+        return dp[prices.length - 1][0];
+    }
+
+
+    /**
+     * 动态规划？
+     * 可能只需要从右往左，找到第一个比当前大的值
+     * 不行！ 必须要是连续的
+     *
+     * @param prices
+     * @return
+     */
+    public int maxProfit4(int[] prices) {
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        int profit = 0;
+        for (int i = 0; i < prices.length - 1; i++) {
+            if (prices[i+1] > prices[i]) {
+                profit += prices[i+1] - prices[i];
+            }
+        }
+        return profit;
+    }
+
+    public static void main(String[] args) {
+        int[] prices = new int[]{7, 1, 5, 3, 6, 4};
+        int result = new LeetCode122买卖股票的最佳时机II().maxProfit4(prices);
+        System.out.println(result);
     }
 }

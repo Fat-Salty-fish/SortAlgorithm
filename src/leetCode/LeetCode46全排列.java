@@ -110,6 +110,42 @@ public class LeetCode46全排列 {
         }
     }
 
+    /**
+     * 全排列 我理解是一个DFS
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> permute4(int[] nums) {
+        if (nums == null || nums.length == 0){
+            return new ArrayList<>();
+        }
+        List<List<Integer>> result = new ArrayList<>();
+        dfs2(nums, new ArrayList<>(), result, 0);
+        return result;
+    }
+
+    /**
+     * DFS 但是需要知道当前有那些元素已经存放在数组中了
+     * @param nums
+     * @param currentPath
+     * @param result
+     * @param currentIndex
+     * @return
+     */
+    public void dfs2(int[] nums, List<Integer> currentPath, List<List<Integer>> result, int currentIndex) {
+        if (currentPath.size() == nums.length) {
+            result.add(new ArrayList<>(currentPath));
+            return ;
+        }
+        for (int i = currentIndex; i < nums.length; i++){
+            swap(nums, i, currentIndex);
+            currentPath.add(nums[currentIndex]);
+            dfs2(nums, currentPath, result, currentIndex + 1);
+            currentPath.remove(currentPath.size() - 1);
+            swap(nums, i, currentIndex);
+        }
+    }
+
     public static void main(String[] args) {
         int[] array = new int[]{1, 2, 3};
         List<List<Integer>> list = new LeetCode46全排列().permute(array);

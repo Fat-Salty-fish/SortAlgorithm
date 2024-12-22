@@ -1,5 +1,8 @@
 package leetCode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * @author lizhongjie
  * @desc
@@ -70,7 +73,7 @@ public class LeetCode200岛屿数量 {
             for (int j = 0; j < grid.length; j++) {
                 if (grid[i][j] == 1) {
                     result++;
-                    change(grid,i,j);
+                    change(grid, i, j);
                 }
             }
         }
@@ -96,5 +99,71 @@ public class LeetCode200岛屿数量 {
         change(grid, x - 1, y);
         change(grid, x, y + 1);
         change(grid, x, y - 1);
+    }
+
+    /**
+     * BFS
+     *
+     * @param grid
+     * @return
+     */
+    public int numIslands3(char[][] grid) {
+        if (grid == null || grid.length == 0) {
+            return 0;
+        }
+        int length = grid.length;
+        int height = grid[0].length;
+        boolean[][] visited = new boolean[length][height];
+        int result = 0;
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < height; j++) {
+                if (grid[i][j] == '1' && !visited[i][j]) {
+                    result += bfs(grid, i, j, visited, length, height);
+                }
+            }
+        }
+
+        return result;
+    }
+
+
+    public int bfs(char[][] grid, int x, int y, boolean[][] visited, int length, int height) {
+        Queue<Point<Integer, Integer>> queue = new LinkedList<>();
+        queue.add(new Point<>(x, y));
+        visited[x][y] = true;
+        while (!queue.isEmpty()) {
+            Point<Integer, Integer> point = queue.poll();
+            x = point.x;
+            y = point.y;
+            if (x - 1 >= 0 && !visited[x - 1][y] && grid[x - 1][y] == '1') {
+                queue.offer(new Point<>(x - 1, y));
+                visited[x - 1][y] = true;
+            }
+            if (x + 1 < length && !visited[x + 1][y] && grid[x + 1][y] == '1') {
+                queue.offer(new Point<>(x + 1, y));
+                visited[x + 1][y] = true;
+            }
+            if (y - 1 >= 0 && !visited[x][y - 1] && grid[x][y - 1] == '1') {
+                queue.offer(new Point<>(x, y - 1));
+                visited[x][y - 1] = true;
+            }
+            if (y + 1 < height && !visited[x][y + 1] && grid[x][y + 1] == '1') {
+                queue.offer(new Point<>(x, y + 1));
+                visited[x][y + 1] = true;
+            }
+        }
+        return 1;
+    }
+
+
+    private static class Point<A, B> {
+        public A x;
+
+        public B y;
+
+        public Point(A x, B y) {
+            this.x = x;
+            this.y = y;
+        }
     }
 }

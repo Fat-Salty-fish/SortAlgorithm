@@ -1,8 +1,6 @@
 package leetCode;
 
-import com.sun.org.apache.xpath.internal.operations.Equals;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
