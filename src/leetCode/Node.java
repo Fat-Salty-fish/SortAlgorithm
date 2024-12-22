@@ -15,6 +15,7 @@ public class Node {
     public Node random;
     public List<Node> neighbors = new ArrayList<>();
     public Node parent;
+    public List<Node> children;
 
     public Node() {
     }
