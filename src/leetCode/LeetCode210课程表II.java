@@ -1,7 +1,6 @@
 package leetCode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author lizhongjie
@@ -94,10 +93,68 @@ public class LeetCode210课程表II {
         stack[indexOfLast++] = currentNode;
     }
 
+    /**
+     * 拓扑排序 + BFS？
+     *
+     * @param numCourses
+     * @param prerequisites
+     * @return
+     */
+    public int[] findOrder2(int numCourses, int[][] prerequisites) {
+        Map<Integer, Set<Integer>> targets = new HashMap<>();
+        Map<Integer, Integer> inDegrees = new HashMap<>();
+        // 初始化
+        for (int i = 0; i < numCourses; i++) {
+            targets.put(i, new HashSet<>());
+            inDegrees.put(i, 0);
+        }
+
+        // 构建邻接矩阵和入度map
+        for (int[] edge : prerequisites) {
+            int from = edge[1];
+            int target = edge[0];
+            Set<Integer> targetSet = targets.getOrDefault(from, new HashSet<>());
+            targetSet.add(target);
+            inDegrees.put(target, inDegrees.getOrDefault(target, 0) + 1);
+            targets.put(from, targetSet);
+        }
+        List<Integer> result = new ArrayList<>();
+
+        // BFS
+        Queue<Integer> queue = new LinkedList<>();
+        // 初始化
+        for (Map.Entry<Integer, Integer> entry : inDegrees.entrySet()) {
+            if (entry.getValue() == 0) {
+                queue.offer(entry.getKey());
+            }
+        }
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                int currentNode = queue.poll();
+                Set<Integer> targetSet = targets.get(currentNode);
+                for (int target : targetSet) {
+                    inDegrees.put(target, inDegrees.get(target) - 1);
+                    if (inDegrees.get(target) == 0) {
+                        queue.offer(target);
+                    }
+                }
+                result.add(currentNode);
+            }
+        }
+
+        if (result.size() != numCourses) {
+            return new int[0];
+        }
+
+        return result.stream().mapToInt(Integer::intValue).toArray();
+    }
+
     public static void main(String[] args) {
         int num = 2;
-        int[][] arrays = {{0, 1}, {1, 0}};
-        int[] result = new LeetCode210课程表II().findOrder(num, arrays);
-        System.out.println(result);
+        int[][] arrays = {{1, 0}};
+        int[] result = new LeetCode210课程表II().findOrder2(num, arrays);
+        System.out.println(Arrays.toString(result));
     }
 }

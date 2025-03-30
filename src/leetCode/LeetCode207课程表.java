@@ -1,7 +1,6 @@
 package leetCode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author lizhongjie
@@ -70,4 +69,56 @@ public class LeetCode207课程表 {
         }
         visited[currentNode] = 2;
     }
+
+    /**
+     * 拓扑排序
+     * 计算每门课的入度
+     *
+     * @param numCourses
+     * @param prerequisites
+     * @return
+     */
+    public boolean canFinish2(int numCourses, int[][] prerequisites) {
+        Map<Integer, Integer> inDegree = new HashMap<>();
+        Map<Integer, Set<Integer>> matrix = new HashMap<>();
+        for (int i = 0; i < numCourses; i++) {
+            inDegree.put(i, 0);
+            matrix.put(i, new HashSet<>());
+        }
+        for (int[] edge : prerequisites) {
+            int start = edge[0];
+            int end = edge[1];
+            inDegree.put(end, inDegree.get(end) + 1);
+            matrix.get(start).add(end);
+        }
+
+        // BFS 即可
+        Deque<Integer> queue = new LinkedList<>();
+        for (Map.Entry<Integer, Integer> entry : inDegree.entrySet()) {
+            if (entry.getValue() == 0) {
+                queue.offer(entry.getKey());
+            }
+        }
+
+        int finishedCourses = 0;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                int cur = queue.poll();
+                finishedCourses ++;
+                Set<Integer> targets = matrix.get(cur);
+                for (Integer target : targets) {
+                    inDegree.put(target, inDegree.get(target) - 1);
+                    if (inDegree.get(target) == 0){
+                        queue.offer(target);
+                    }
+                }
+            }
+        }
+
+        return finishedCourses == numCourses;
+    }
+
+
 }

@@ -1,7 +1,9 @@
 package leetCode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * @author acer
@@ -37,7 +39,7 @@ public class LeetCode22括号生成 {
      */
     public List<String> generateParenthesis2(int n) {
         List<String> result = new ArrayList<>();
-        dfs(n,result,0,0,"");
+        dfs(n, result, 0, 0, "");
         return result;
     }
 
@@ -51,6 +53,46 @@ public class LeetCode22括号生成 {
         }
         if (right < left) {
             dfs(target, paths, left, right + 1, temp + ")");
+        }
+    }
+
+    /**
+     * BFS 三刷
+     *
+     * @param n
+     * @return
+     */
+    public List<String> generateParenthesis3(int n) {
+        Queue<Temp> queue = new LinkedList<>();
+        queue.offer(new Temp("", n, n));
+        List<String> ans = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            Temp temp = queue.poll();
+            if (temp.left == temp.right && temp.left == 0) {
+                ans.add(temp.str);
+            }
+            if (temp.left > 0) {
+                queue.offer(new Temp(temp.str + "(", temp.left - 1, temp.right));
+            }
+            if (temp.right > temp.left && temp.right > 0) {
+                queue.offer(new Temp(temp.str + ")", temp.left, temp.right - 1));
+            }
+        }
+        return ans;
+    }
+
+
+    public static class Temp {
+        public String str;
+
+        public int left;
+
+        public int right;
+
+        public Temp(String str, int left, int right) {
+            this.str = str;
+            this.left = left;
+            this.right = right;
         }
     }
 }

@@ -142,6 +142,108 @@ public class LeetCode127单词接龙 {
         return 0;
     }
 
+
+    /**
+     * 单向BFS
+     *
+     * @param beginWord
+     * @param endWord
+     * @param wordList
+     * @return
+     */
+    public int ladderLength3(String beginWord, String endWord, List<String> wordList) {
+        Set<String> wordListSet = new HashSet<>(wordList);
+        if (!wordListSet.contains(endWord)) {
+            return 0;
+        }
+        Queue<String> queue = new LinkedList<>();
+        Set<String> visited = new HashSet<>();
+        int result = 1;
+        visited.add(beginWord);
+        queue.offer(beginWord);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                String current = queue.poll();
+                // 对每一个位置进行遍历，更换一个字母
+                for (int n = 0; n < current.length(); n++) {
+                    for (int j = 0; j < 26; j++) {
+                        char changed = (char) ('a' + j);
+                        char[] currentArray = current.toCharArray();
+                        currentArray[n] = changed;
+                        String temp = String.valueOf(currentArray);
+                        if (endWord.equals(temp)) {
+                            return result + 1;
+                        }
+                        if (!visited.contains(temp) && wordListSet.contains(temp)) {
+                            visited.add(temp);
+                            queue.offer(temp);
+                        }
+                    }
+                }
+            }
+            result++;
+        }
+        return 0;
+    }
+
+    /**
+     * 双向BFS
+     *
+     * @param beginWord
+     * @param endWord
+     * @param wordList
+     * @return
+     */
+    public int ladderLength4(String beginWord, String endWord, List<String> wordList) {
+        Set<String> wordListSet = new HashSet<>(wordList);
+        if (!wordListSet.contains(endWord)) {
+            return 0;
+        }
+        // 需要两个Queue
+        Set<String> leftSet = new HashSet<>();
+        Set<String> rightSet = new HashSet<>();
+        Set<String> visitedAll = new HashSet<>();
+        leftSet.add(beginWord);
+        rightSet.add(endWord);
+        visitedAll.add(beginWord);
+        visitedAll.add(endWord);
+        int result = 2;
+        // 条件为并，因为如果一个为空的话，表示无法相遇
+        while (!leftSet.isEmpty() && !rightSet.isEmpty()) {
+            // 总是遍历元素少的那一个
+            if (rightSet.size() < leftSet.size()) {
+                Set<String> temp = rightSet;
+                rightSet = leftSet;
+                leftSet = temp;
+            }
+            Set<String> nextSet = new HashSet<>();
+            for (String currentString : leftSet) {
+                for (int i = 0; i < currentString.length(); i++) {
+                    char[] charOfCurrentString = currentString.toCharArray();
+                    for (char j = 'a'; j <= 'z'; j++) {
+                        // 元素相同，跳过
+                        if (charOfCurrentString[i] == j){
+                            continue;
+                        }
+                        charOfCurrentString[i] = j;
+                        String tempString = String.valueOf(charOfCurrentString);
+                        if (rightSet.contains(tempString)){
+                            return result;
+                        }
+                        if (wordListSet.contains(tempString) && !visitedAll.contains(tempString)){
+                            nextSet.add(tempString);
+                            visitedAll.add(tempString);
+                        }
+                    }
+                }
+            }
+            leftSet = nextSet;
+            result++;
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
         String beginWord = "hit";
         String endWord = "cog";
@@ -152,6 +254,7 @@ public class LeetCode127单词接龙 {
         wordList.add("lot");
         wordList.add("log");
         wordList.add("cog");
-        Integer result = new LeetCode127单词接龙().ladderLength2(beginWord, endWord, wordList);
+        Integer result = new LeetCode127单词接龙().ladderLength4(beginWord, endWord, wordList);
+        System.out.println(result);
     }
 }

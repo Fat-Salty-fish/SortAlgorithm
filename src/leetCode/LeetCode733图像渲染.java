@@ -1,7 +1,9 @@
 package leetCode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * @author acer
@@ -90,6 +92,65 @@ public class LeetCode733图像渲染 {
             image[x][y] = targetColor;
         }
     }
+
+
+    /**
+     * 点类
+     */
+    public static class Point {
+        int x;
+        int y;
+
+        public Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    public static int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+    /**
+     * 三刷
+     * bfs
+     *
+     * @param image
+     * @param sr
+     * @param sc
+     * @param color
+     * @return
+     */
+    public int[][] floodFill3(int[][] image, int sr, int sc, int color) {
+        int currentColor = image[sr][sc];
+        int rows = image.length;
+        int cols = image[0].length;
+        boolean[][] visited = new boolean[rows][cols];
+        Queue<Point> queue = new LinkedList<>();
+        Point point = new Point(sr, sc);
+        queue.offer(point);
+        visited[sr][sc] = true;
+        while (!queue.isEmpty()) {
+            Point currentPoint = queue.poll();
+            int currentX = currentPoint.x;
+            int currentY = currentPoint.y;
+            for(int[] direction: dirs){
+                int newX = currentX + direction[0];
+                int newY = currentY + direction[1];
+                if (newX >= 0 && newX < rows && newY >= 0 && newY < cols && image[newX][newY] == currentColor && !visited[newX][newY]) {
+                    visited[newX][newY] = true;
+                    queue.offer(new Point(newX, newY));
+                }
+            }
+        }
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (visited[i][j]) {
+                    image[i][j] = color;
+                }
+            }
+        }
+        return image;
+    }
+
 
     public static void main(String[] args) {
         int[][] array = new int[][]{{1, 1, 1}, {1, 1, 0}, {1, 0, 1}};

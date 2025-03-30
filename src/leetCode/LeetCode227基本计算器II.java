@@ -191,9 +191,80 @@ public class LeetCode227基本计算器II {
         return result;
     }
 
+    /**
+     * 基本计算器
+     * s是一个算式，计算出它的结果
+     * 双栈应该可以解决
+     *
+     * @param s
+     * @return
+     */
+    public int calculate4(String s) {
+        Deque<Integer> numberStack = new LinkedList<>();
+        Deque<Character> symbolStack = new LinkedList<>();
+        StringBuilder builder = new StringBuilder();
+        int tempIndex = 0;
+        while (tempIndex < s.length()){
+            if (s.charAt(tempIndex) != ' ') {
+                builder.append(s.charAt(tempIndex));
+            }
+            tempIndex++;
+        }
+
+        s = builder.toString();
+
+        int index = 0;
+        int length = s.length();
+        while (index < length) {
+            if (s.charAt(index) >= '0' && s.charAt(index) <= '9') {
+                Pair number = readNumber(s, index);
+                numberStack.offer(number.number);
+                index = number.index;
+            } else {
+                if (s.charAt(index) == '+' || s.charAt(index) == '-') {
+                    symbolStack.offer(s.charAt(index++));
+                } else if (s.charAt(index) == '*' || s.charAt(index) == '/') {
+                    int symbolIndex = index;
+                    int firstNum = numberStack.pollLast();
+                    Pair secondNum = readNumber(s, ++index);
+                    int tempResult = (s.charAt(symbolIndex) == '*') ? firstNum * secondNum.number : firstNum / secondNum.number;
+                    numberStack.offer(tempResult);
+                    index = secondNum.index;
+                }
+            }
+        }
+
+        while (!symbolStack.isEmpty()){
+            int firstNum = numberStack.pollFirst();
+            int secondNum = numberStack.pollFirst();
+            char symbol = symbolStack.pollFirst();
+            int tempResult = (symbol == '+') ? firstNum + secondNum : firstNum - secondNum;
+            numberStack.offerFirst(tempResult);
+        }
+        return numberStack.poll();
+    }
+
+    public Pair readNumber(String s, int index) {
+        int temp = 0;
+        while (index < s.length() && s.charAt(index) >= '0' && s.charAt(index) <= '9') {
+            temp = 10 * temp + (s.charAt(index) - '0');
+            index++;
+        }
+        Pair pair = new Pair();
+        pair.number = temp;
+        pair.index = index;
+        return pair;
+    }
+
+    /**
+     * As the return value
+     */
+    private static class Pair {
+        public int number;
+        public int index;
+    }
+
     public static void main(String[] args) {
-        System.out.println(new LeetCode227基本计算器II().calculate2("3+2*2"));
-        LinkedList<Integer> list = new LinkedList();
-        list.clear();
+        System.out.println(new LeetCode227基本计算器II().calculate4(" 3 / 2 "));
     }
 }
